@@ -12,7 +12,6 @@ export const Post = () => {
   const { state } = usePostProvider();
   const [post, setPost] = useState([]);
   const { id } = useParams();
-  console.log(post);
 
   useEffect(() => {
     const token = localStorage.getItem("encodedToken");
@@ -27,17 +26,18 @@ export const Post = () => {
       }
     };
     getPost(id);
+    const getComments = async (id) => {
+      const token = localStorage.getItem("encodedToken");
+      const response = await axios.get(`/api/comments/${id}`, {
+        headers: {
+          authorization: token,
+        },
+      });
+      console.log(response);
+    };
+    getComments(id);
   }, []);
-  const getComments = async (id) => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.get(`/api/comments/${id}`, {
-      headers: {
-        authorization: token,
-      },
-    });
-    console.log(response);
-  };
-  // getComments(id);
+
   return (
     <div className="common-container">
       <NavList />
