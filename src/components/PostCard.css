@@ -1,0 +1,28 @@
+.postcard-container{
+    border: 1px solid var(--secondary-color);
+    padding: 1rem;
+    position: relative;
+
+}
+.avatar-content-container{
+    display: flex;
+    padding: 1rem;
+}
+.post-content{
+    padding-left: 1rem;
+}
+.user-action-icons-container{
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.user-action-icons-container i{
+    cursor: pointer;
+}
+.edit-options{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+}

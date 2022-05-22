@@ -1,0 +1,63 @@
+.pList {
+    width: 20rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.pList-input-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3.5rem;
+}
+.pList-input{
+    margin: 2rem;
+    border-radius: .5rem;
+    padding: .225rem;
+    border: 2px solid var(--secondary-color);
+}
+.pList-img{
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+}
+.pList-small-container{
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+    border: 2px solid var(--secondary-color);
+}
+.pList-heading{
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    font-size: smaller;
+}
+
+.pList-users{
+    width: 75%;
+    font-size: small;
+}
+
+.pList-single-user{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.pList-name-and-img{
+    display: flex ;
+}
+.pList-username{
+    color: gray;
+}
+.pList-names{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.pList-follow {
+ cursor: pointer;
+}

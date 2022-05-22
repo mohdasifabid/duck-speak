@@ -1,0 +1,25 @@
+.navlist{
+    min-width: 15rem;
+    height: 100%;
+}
+.navlist-content-container{
+    margin: 3.49rem 0 0 3rem;
+}
+.navlist-content-container div{
+    margin-bottom: 1rem;
+}
+.navlist-btn{
+    border: none;
+    padding: .225rem;
+    cursor: pointer;
+    text-decoration: none;
+    border: 2px solid var(--secondary-color);
+    color: var(--primary-color);
+}
+.navlist-content-container div i {
+    margin-right: .75rem;
+}
+.navlist-links{
+    text-decoration: none;
+    color: var(--primary-color);
+}

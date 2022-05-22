@@ -1,0 +1,101 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Navbar } from "./Navbar";
+import { Postcard } from "./PostCard";
+import { usePostProvider } from "../postProvider";
+import "./User.css";
+import { NavList } from "./NavList";
+import { PeoplesList } from "./PeopleList";
+export const User = () => {
+  const { state } = usePostProvider();
+  const { username } = useParams();
+  const [user, setUser] = useState({});
+  console.log(user);
+  useEffect(() => {
+    try {
+      const findUser = async (username) => {
+        let clickedUser = await state.users.find(
+          (user) => user.username === username
+        );
+
+        setUser(clickedUser);
+      };
+      findUser(username);
+    } catch (error) {}
+  }, []);
+
+  const follow = async (userId) => {
+    const token = localStorage.getItem("encodedToken");
+    const response = await axios.post(
+      `/api/users/follow/${userId}`,
+      {},
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    );
+    if (response.status === 200) {
+      const getUser = async () => {
+        const response = await axios.get(`/api/users/`, {
+          headers: {
+            authorization: token,
+          },
+        });
+        if (response.status === 200) {
+          dispatch({ type: "GET_USERS", payload: response.data.users });
+        }
+      };
+      getUser();
+    }
+  };
+
+  return (
+    <div className="common-container">
+      <NavList />
+      <div>
+        <Navbar style={{ position: "fixed" }} />
+        <div>
+          <div className="img-container">
+            <img
+              className="cover-img"
+              src="https://picsum.photos/536/354"
+              alt=""
+            />
+            <img
+              className="profile-img"
+              src="https://picsum.photos/id/1062/367/267"
+              alt=""
+            />
+          </div>
+          <div className="btn-container">
+            <button
+              className="follow-btn duck-primary-btn-s duck-primary-btn"
+              onClick={() => follow(user._id)}
+            >
+              Follow
+            </button>
+          </div>
+          <div className="userInfo-container">
+            <p className="name-and-userId">
+              <strong>{`${user.firstName} ${user.lastName}`}</strong>
+              <small>{`@${user.username}`}</small>
+            </p>
+            <p>Joined May 2022</p>
+            <p>
+              <span>
+                <strong>{user.following}</strong>Following
+              </span>
+              <span>
+                <strong>{user.followers}</strong>Followes
+              </span>
+            </p>
+          </div>
+        </div>
+        {/* <Postcard /> */}
+      </div>
+      <PeoplesList />
+    </div>
+  );
+};
