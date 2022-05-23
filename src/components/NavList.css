@@ -13,10 +13,10 @@
     border: none;
     cursor: pointer;
     text-decoration: none;
-    border: 1px solid var(--secondary-color);
+    border: 1.5px solid var(--secondary-color);
     color: var(--primary-color);
     font-size: small;
-    padding: 0rem .125rem;
+    padding: .1rem .5rem;
     
 }
 .navlist-content-container div i {
