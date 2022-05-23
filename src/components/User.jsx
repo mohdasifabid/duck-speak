@@ -9,20 +9,21 @@ import { NavList } from "./NavList";
 import { PeoplesList } from "./PeopleList";
 export const User = () => {
   const { state } = usePostProvider();
-  const { username } = useParams();
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState([]);
   console.log(user);
   useEffect(() => {
-    try {
-      const findUser = async (username) => {
-        let clickedUser = await state.users.find(
-          (user) => user.username === username
-        );
-
-        setUser(clickedUser);
-      };
-      findUser(username);
-    } catch (error) {}
+    const getUser = async (userId) => {
+      const token = localStorage.getItem("encodedToken");
+      const response = await axios.get(`/api/users/${userId}`, {
+        headers: {
+          authorization: token,
+        },
+      });
+      if (response.status === 200) {
+        setUser(response.data.user);
+      }
+    };
+    getUser(state.userID);
   }, []);
 
   const follow = async (userId) => {
@@ -37,17 +38,7 @@ export const User = () => {
       }
     );
     if (response.status === 200) {
-      const getUser = async () => {
-        const response = await axios.get(`/api/users/`, {
-          headers: {
-            authorization: token,
-          },
-        });
-        if (response.status === 200) {
-          dispatch({ type: "GET_USERS", payload: response.data.users });
-        }
-      };
-      getUser();
+      setUser(response.data.followUser);
     }
   };
 
@@ -72,7 +63,7 @@ export const User = () => {
           <div className="btn-container">
             <button
               className="follow-btn duck-primary-btn-s duck-primary-btn"
-              onClick={() => follow(user._id)}
+              onClick={() => follow(state.userID)}
             >
               Follow
             </button>

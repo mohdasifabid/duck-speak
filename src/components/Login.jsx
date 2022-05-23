@@ -26,13 +26,13 @@ export const Login = () => {
         <h2>Login to Speak</h2>
         <input
           type="text"
-          className="login-email"
+          className="login-inputs"
           placeholder="username"
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
           type="password"
-          className="login-password"
+          className="login-inputs"
           placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
         />

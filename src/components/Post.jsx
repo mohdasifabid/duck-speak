@@ -33,7 +33,7 @@ export const Post = () => {
           authorization: token,
         },
       });
-      console.log(response);
+      // console.log(response);
     };
     getComments(id);
   }, []);
@@ -46,7 +46,7 @@ export const Post = () => {
         <Postcard item={post} key={post._id} post={post} />
         {state.reply && (
           <div className="reply-box">
-            <Reply />
+            <Reply item={post} />
           </div>
         )}
       </div>
