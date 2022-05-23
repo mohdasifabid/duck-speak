@@ -198,7 +198,7 @@ export const Postcard = ({ item }) => {
         <Link to={`/post/${item._id}`}>
           <span>
             <i
-              className="fa-regular fa-comment"
+              className="fa-regular fa-comment reply-icon"
               onClick={() => {
                 dispatch({ type: "REPLYING", payload: true });
               }}

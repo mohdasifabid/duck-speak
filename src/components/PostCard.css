@@ -25,3 +25,6 @@
     right: 1rem;
     cursor: pointer;
 }
+.reply-icon {
+   color: var(--primary-color);
+}
