@@ -2,7 +2,7 @@
     border: 1px solid var(--secondary-color);
     padding: 1rem;
     position: relative;
-
+    width: 25rem;
 }
 .avatar-content-container{
     display: flex;
