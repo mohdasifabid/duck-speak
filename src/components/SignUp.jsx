@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Navbar } from "./Navbar";
 import { useAuthProvider } from "../authProvider";
+import "./SignUp.css";
 
 export const Signup = () => {
   const { dispatch: authDispatch } = useAuthProvider();
@@ -27,50 +28,40 @@ export const Signup = () => {
     }
   };
   return (
-    <div className="login">
-      {/* <Navbar /> */}
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "1rem",
-          border: "3px solid var(--secondary-color)",
-          padding: "2rem",
-          margin: "2rem",
-        }}
-      >
+    <div className="signup-container">
+      <div className="signup-box">
         <h2>Create a new account</h2>
         <input
           type="text"
-          className="login-name"
+          className="signup-inputs"
           placeholder="name"
           onChange={(e) => setName(e.target.value)}
         />
         <input
           type="email"
-          className="login-email"
+          className="signup-inputs"
           placeholder="email"
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="text"
-          className="login-name"
+          className="signup-inputs"
           placeholder="username"
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
           type="password"
-          className="login-password"
+          className="signup-inputs"
           placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
         />
         <input
           type="password"
-          className="login-password"
+          className="signup-inputs"
           placeholder="confirm password"
           onChange={(e) => setConfirmedPassword(e.target.value)}
         />
-        <button className="login-btn" onClick={signupHandler}>
+        <button className="signup-btn" onClick={signupHandler}>
           Signup
         </button>
         <p>
