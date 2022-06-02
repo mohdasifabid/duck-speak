@@ -60,3 +60,8 @@
  cursor: pointer;
  margin-left: .5rem;
 }
+@media (max-width: 620px){
+    .pList{
+        display: none;
+    }
+}

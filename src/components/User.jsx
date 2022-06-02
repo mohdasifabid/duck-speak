@@ -19,6 +19,7 @@ export const User = () => {
           authorization: token,
         },
       });
+      console.log("getting", response);
       if (response.status === 200) {
         setUser(response.data.user);
       }
@@ -37,8 +38,9 @@ export const User = () => {
         },
       }
     );
+    console.log(response);
     if (response.status === 200) {
-      setUser(response.data.followUser);
+      setUser(response.data.user);
     }
   };
 
