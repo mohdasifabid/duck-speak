@@ -1,6 +1,10 @@
 .duck-navbar-container{
   max-height: 3.5rem;
   border: 2px solid var(--secondary-color);
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 100;
 }
 .duck-navbar-home {
   margin-right: 4rem;
