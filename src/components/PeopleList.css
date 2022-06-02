@@ -9,6 +9,9 @@
     justify-content: center;
     align-items: center;
     height: 3.5rem;
+    position: sticky;
+    top: 0;
+    background-color: white;
 }
 .pList-input{
     margin: 2rem;
