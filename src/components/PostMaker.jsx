@@ -49,9 +49,8 @@ export const PostMaker = () => {
         ></textarea>
       </div>
       <div className="bottom-container">
-        {/* <span className="length-indicator">{newPost.length}</span> */}
         <button
-          className="duck-primary-btn-s duck-primary-btn"
+          className="speak-btn"
           onClick={() => {
             postThePost();
             setNewPost("");

@@ -175,6 +175,40 @@ export const Postcard = ({ item }) => {
         </div>
       </div>
       <div className="user-action-icons-container">
+        {likes ? (
+          <span>
+            <i
+              className="fa-regular fa-heart"
+              onClick={() => postDislike(item._id)}
+            ></i>
+            {likes}
+          </span>
+        ) : (
+          <span>
+            <i
+              className="fa-regular fa-heart"
+              onClick={() => postLike(item._id)}
+            ></i>
+            {likes}
+          </span>
+        )}
+
+        <Link to={`/post/${item._id}`}>
+          <span>
+            <i
+              className="fa-regular fa-comment reply-icon"
+              onClick={() => {
+                dispatch({ type: "REPLYING", payload: true });
+              }}
+            ></i>
+          </span>
+        </Link>
+        <Link to={`/edit/${item._id}`}>
+          <span>
+            <i class="fa-solid fa-pen-to-square"></i>
+          </span>
+        </Link>
+
         {isMarked !== -1 ? (
           <span>
             <i
@@ -195,33 +229,6 @@ export const Postcard = ({ item }) => {
           </span>
         )}
 
-        <Link to={`/post/${item._id}`}>
-          <span>
-            <i
-              className="fa-regular fa-comment reply-icon"
-              onClick={() => {
-                dispatch({ type: "REPLYING", payload: true });
-              }}
-            ></i>
-          </span>
-        </Link>
-        {likes ? (
-          <span>
-            <i
-              className="fa-regular fa-heart"
-              onClick={() => postDislike(item._id)}
-            ></i>
-            {likes}
-          </span>
-        ) : (
-          <span>
-            <i
-              className="fa-regular fa-heart"
-              onClick={() => postLike(item._id)}
-            ></i>
-            {likes}
-          </span>
-        )}
         <span>
           <i
             className="fa-solid fa-trash"
@@ -229,9 +236,6 @@ export const Postcard = ({ item }) => {
           ></i>
         </span>
       </div>
-      <Link to={`/edit/${item._id}`}>
-        <span className="edit-options">Edit</span>
-      </Link>
     </div>
   );
 };

@@ -38,3 +38,9 @@
   }
   
 }
+.edit-page{
+  margin: 1rem 3rem;
+}
+.edit-page div textarea {
+  padding: 0;
+}

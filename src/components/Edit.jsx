@@ -42,20 +42,20 @@ export const Edit = () => {
   return (
     <div>
       <Navbar />
-      <div className="edit-box">
-        <textarea
-          value={post.content}
-          className="textarea"
-          placeholder="Whats happening?"
-          onChange={(e) => {
-            setPost({ ...post, content: e.target.value });
-          }}
-        ></textarea>
-        <div className="reply-btn-container ">
-          <button
-            className="duck-primary-btn-s duck-primary-btn"
-            onClick={() => postEditedPost(id)}
-          >
+      <div className="edit-page">
+        <div className="avatar-textarea-container">
+          <textarea
+            id="createPostHere"
+            value={post.content}
+            className="textarea"
+            placeholder="Whats happening?"
+            onChange={(e) => {
+              setPost({ ...post, content: e.target.value });
+            }}
+          ></textarea>
+        </div>
+        <div className="bottom-container">
+          <button className="speak-btn" onClick={() => postEditedPost(id)}>
             update
           </button>
         </div>

@@ -17,7 +17,6 @@ export const Reply = ({ item }) => {
         },
       },
     ]);
-    console.log(response);
   };
   return (
     <div>
@@ -29,10 +28,7 @@ export const Reply = ({ item }) => {
         ></textarea>
       </div>
       <div className="bottom-container">
-        <button
-          className="duck-primary-btn-s duck-primary-btn"
-          onClick={() => postComment(item.id)}
-        >
+        <button className="speak-btn" onClick={() => postComment(item.id)}>
           reply
         </button>
       </div>

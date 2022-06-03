@@ -26,6 +26,7 @@ export const Post = () => {
       }
     };
     getPost(id);
+
     const getComments = async (id) => {
       const token = localStorage.getItem("encodedToken");
       const response = await axios.get(`/api/comments/${id}`, {
@@ -33,7 +34,7 @@ export const Post = () => {
           authorization: token,
         },
       });
-      // console.log(response);
+      console.log(response);
     };
     getComments(id);
   }, []);
