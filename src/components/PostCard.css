@@ -28,6 +28,7 @@
 }
 .comment-count-container{
    text-decoration: none; 
+   color: var(--primary-color);
 }
 .reply-icon {
    color: var(--primary-color);

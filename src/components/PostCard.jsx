@@ -193,7 +193,7 @@ export const Postcard = ({ item }) => {
           </span>
         )}
 
-        <Link to={`/post/${item._id}`}>
+        <Link to={`/post/${item._id}`} className="comment-count-container">
           <span>
             <i
               className="fa-regular fa-comment reply-icon"
