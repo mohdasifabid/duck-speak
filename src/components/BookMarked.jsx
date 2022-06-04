@@ -26,11 +26,9 @@ export const BookMarked = () => {
   return (
     <div className="common-container">
       <NavList />
-      <div>
+      <div className="main-container">
         <Navbar />
-        {state.bookmarks.length === 0 && (
-          <h1>You have not bookmarked any post yet..</h1>
-        )}
+        {state.bookmarks.length === 0 && <h3>You have no bookmarks</h3>}
         {state.bookmarks.map((item) => {
           return <Postcard item={item} key={item._id} />;
         })}
