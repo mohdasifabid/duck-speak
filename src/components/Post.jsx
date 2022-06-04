@@ -33,15 +33,14 @@ export const Post = () => {
         </div>
         {comments.map((comment) => {
           return (
-            <div className="avatar-textarea-container " key={comment._id}>
+            <div className="comment-card " key={comment._id}>
               <img
                 src="https://picsum.photos/id/1062/367/267"
                 alt=""
                 className="duck-avatar-badge-img"
-                style={{ width: "2rem", height: "2rem" }}
               />
-              <p>{comment.username}</p>
-              <p>{comment.text}</p>
+              <p className="comment-card-username">{comment.username}</p>
+              <p className="comment-card-comment">{comment.text}</p>
             </div>
           );
         })}
