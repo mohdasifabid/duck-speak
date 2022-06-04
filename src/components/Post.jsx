@@ -58,6 +58,20 @@ export const Post = () => {
                 />
                 <p className="comment-card-username">{comment.username}</p>
                 <p className="comment-card-comment">{comment.text}</p>
+                <div className="comment-card-bottom">
+                  <span>
+                    <i className="fa-regular fa-thumbs-up"></i>
+                  </span>
+                  <span>
+                    <i className="fa-regular fa-thumbs-down"></i>
+                  </span>
+                  <span>
+                    <i className="fa-solid fa-pen-to-square"></i>
+                  </span>
+                  <span>
+                    <i className="fa-solid fa-trash"></i>
+                  </span>
+                </div>
               </div>
             );
           })}

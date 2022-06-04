@@ -70,3 +70,16 @@
   padding-left: 2.5rem;
   font-size: small;
 }
+.comment-card-bottom{
+ display: flex;
+ justify-content: space-between;
+ padding: .25rem 2rem 0 3rem;
+ margin-top: 1rem;
+ font-size: small;
+ border-top: 1px solid var(--secondary-color);
+}
+.comment-card-bottom span {
+  cursor: pointer;
+  margin-top: -.1rem;
+  margin-bottom: -.3rem;
+}
