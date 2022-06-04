@@ -68,7 +68,14 @@ export const Post = () => {
                   <span>
                     <i className="fa-solid fa-pen-to-square"></i>
                   </span>
-                  <span>
+                  <span
+                    onClick={async () => {
+                      let response = await postCall(
+                        `/api/comments/delete/${id}/${comment._id}`
+                      );
+                      setComments(response.comments);
+                    }}
+                  >
                     <i className="fa-solid fa-trash"></i>
                   </span>
                 </div>
