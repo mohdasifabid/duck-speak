@@ -83,3 +83,12 @@
   margin-top: -.1rem;
   margin-bottom: -.3rem;
 }
+.post-container{
+  position: relative;
+}
+.edit{
+  width: 50vw;
+  position: absolute;
+  top: 40vh;
+  left: 25vw;  
+}
