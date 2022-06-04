@@ -1,33 +1,19 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { usePostProvider } from "../postProvider";
 import { Navbar } from "./Navbar";
 import { NavList } from "./NavList";
 import { PeoplesList } from "./PeopleList";
 import { Postcard } from "./PostCard";
-import { Reply } from "./Reply";
+import { getCall } from "./ReusableFunctions";
 
 export const Post = () => {
-  const { state, dispatch } = usePostProvider();
   const [post, setPost] = useState([]);
   const { id } = useParams();
   const [comments, setComments] = useState([]);
-  console.log(comments);
-  useEffect(() => {
-    const token = localStorage.getItem("encodedToken");
-    const getPost = async (id) => {
-      const response = await axios.get(`/api/posts/${id}`, {
-        headers: {
-          authorization: token,
-        },
-      });
-      if (response.status === (200 || 201)) {
-        setPost(response.data.post);
-        setComments(response.data.post.comments);
-      }
-    };
-    getPost(id);
+  useEffect(async () => {
+    let data = await getCall(`/api/posts/${id}`);
+    setPost(data.post);
+    setComments(data.post.comments);
   }, []);
   return (
     <div className="common-container">
