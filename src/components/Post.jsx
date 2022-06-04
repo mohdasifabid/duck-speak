@@ -10,15 +10,17 @@ export const Post = () => {
   const [post, setPost] = useState([]);
   const { id } = useParams();
   const [comments, setComments] = useState([]);
+
   useEffect(async () => {
     let data = await getCall(`/api/posts/${id}`);
     setPost(data.post);
     setComments(data.post.comments);
   }, []);
+
   return (
     <div className="common-container">
       <NavList />
-      <div className="post-body">
+      <div className="main-container">
         <Navbar />
         <Postcard item={post} key={post._id} post={post} />
         <div>
