@@ -26,9 +26,14 @@
     cursor: pointer;
 
 }
-
+.comment-count-container{
+   text-decoration: none; 
+}
 .reply-icon {
    color: var(--primary-color);
+}
+.comment-count{
+    color:var(--primary-color);
 }
 .textContent-container{
     word-break: break-all;
