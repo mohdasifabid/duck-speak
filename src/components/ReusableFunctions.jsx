@@ -15,3 +15,15 @@ export async function getCall(endPoint) {
     console.log(error);
   }
 }
+
+export const postCall = async (endPoint, rqstBody) => {
+  const token = localStorage.getItem("encodedToken");
+  const response = await axios.post(endPoint, rqstBody, {
+    headers: {
+      authorization: token,
+    },
+  });
+  if (response.status === 201) {
+    return response.data;
+  }
+};
