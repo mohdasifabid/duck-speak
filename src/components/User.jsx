@@ -10,7 +10,6 @@ import { PeoplesList } from "./PeopleList";
 export const User = () => {
   const { state } = usePostProvider();
   const [user, setUser] = useState([]);
-  console.log(user);
   useEffect(() => {
     const getUser = async (userId) => {
       const token = localStorage.getItem("encodedToken");
@@ -38,7 +37,6 @@ export const User = () => {
         },
       }
     );
-    console.log(response);
     if (response.status === 200) {
       setUser(response.data.user);
     }

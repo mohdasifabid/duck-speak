@@ -133,7 +133,6 @@ export const Postcard = ({ item }) => {
     dispatch({ type: "GET_USER_ID", payload: clickedUser._id });
   };
   const isMarked = state.bookmarks.findIndex((post) => post._id === item._id);
-
   return (
     <div className="postcard-container">
       <div className="avatar-content-container">
@@ -168,6 +167,7 @@ export const Postcard = ({ item }) => {
                 getPost(item._id);
                 dispatch({ type: "REPLYING", payload: false });
               }}
+              className="textContent-container"
             >
               {item.content}
             </p>
@@ -201,11 +201,12 @@ export const Postcard = ({ item }) => {
                 dispatch({ type: "REPLYING", payload: true });
               }}
             ></i>
+            {item.comments && item.comments.length}
           </span>
         </Link>
         <Link to={`/edit/${item._id}`}>
           <span>
-            <i class="fa-solid fa-pen-to-square"></i>
+            <i className="fa-solid fa-pen-to-square"></i>
           </span>
         </Link>
 

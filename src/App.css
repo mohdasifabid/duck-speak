@@ -31,6 +31,9 @@
 .common-container{
   display: flex;
 }
+.main-container{
+  flex-grow: 1;
+}
 
 @media (max-width: 520px){
   .navlist{

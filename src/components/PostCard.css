@@ -30,3 +30,6 @@
 .reply-icon {
    color: var(--primary-color);
 }
+.textContent-container{
+    word-break: break-all;
+}

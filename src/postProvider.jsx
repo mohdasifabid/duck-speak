@@ -29,7 +29,6 @@ const reducerFunction = (state, action) => {
         ...state,
         bookmarks: action.payload,
       };
-
     case "GET_USER_ID":
       return {
         ...state,

@@ -8,7 +8,6 @@ import { Postcard } from "./PostCard";
 import { PostMaker } from "./PostMaker";
 export const Home = () => {
   const { state, dispatch } = usePostProvider();
-
   useEffect(() => {
     const token = localStorage.getItem("encodedToken");
     const getPosts = async () => {
@@ -26,7 +25,7 @@ export const Home = () => {
   return (
     <div className="common-container">
       <NavList />
-      <div>
+      <div className="main-container">
         <Navbar />
         <PostMaker />
         {state.posts.map((post) => {

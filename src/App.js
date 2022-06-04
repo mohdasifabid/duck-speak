@@ -13,34 +13,22 @@ import { Reply } from "./components/Reply";
 import { User } from "./components/User";
 import { BookMarked } from "./components/BookMarked";
 import { LandingPage } from "./components/LandingPage";
-import axios from "axios";
 import { usePostProvider } from "./postProvider";
 import { getCall } from "./components/ReusableFunctions";
 
 function App() {
   const { state: authState, dispatch: authDispatch } = useAuthProvider();
   const { dispatch } = usePostProvider()
-  useEffect(() => {
+  useEffect(async() => {
     const token = localStorage.getItem("encodedToken")
     if (token) {
       authDispatch({ type: "LOGIN_STATUS", payload: true })
     } else {
       authDispatch({ type: "LOGIN_STATUS", payload: false })
     }
-     const getUser = async () => {
-       const response = await axios.get(`/api/users/`, {
-         headers: {
-           authorization: token,
-         },
-       });
-       if(response.status === 200){
-         dispatch({type: "GET_USERS", payload: response.data.users})
-       }
-     };
-     getUser();
-    // let disp = dispatch({type: "GET_USERS", payload: response.data.users})
-    // getCall(`/api/users/`, "GET_USERS" )
 
+    let data = await getCall("/api/users/");
+    dispatch({type: "GET_USERS", payload: data.users})
   }, [])
 
 

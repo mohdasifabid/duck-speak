@@ -2,6 +2,7 @@
     height: 100%;
     position: sticky;
     top:0;
+    flex-basis: 150px;
 }
 .navlist-content-container{
     margin: 3.49rem 2rem 0 2rem;
