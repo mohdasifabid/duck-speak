@@ -1,28 +1,21 @@
-import axios from "axios";
 import { useEffect } from "react";
-import { usePostProvider } from "../postProvider";
 import { Navbar } from "./Navbar";
 import { NavList } from "./NavList";
 import { PeoplesList } from "./PeopleList";
 import { Postcard } from "./PostCard";
 import { PostMaker } from "./PostMaker";
 import { Link } from "react-router-dom";
+import { getCall } from "./ReusableFunctions";
+import { usePostProvider } from "../postProvider";
+
 export const Home = () => {
   const { state, dispatch } = usePostProvider();
-  useEffect(() => {
-    const token = localStorage.getItem("encodedToken");
-    const getPosts = async () => {
-      const response = await axios.get("/api/posts", {
-        headers: {
-          authorization: token,
-        },
-      });
-      if (response.status === 200) {
-        dispatch({ type: "GET_POSTS", payload: response.data.posts });
-      }
-    };
-    getPosts();
+
+  useEffect(async () => {
+    const data = await getCall("/api/posts");
+    dispatch({ type: "GET_POSTS", payload: data.posts });
   }, []);
+
   return (
     <div className="common-container">
       <Navbar />
