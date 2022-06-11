@@ -22,14 +22,16 @@ export const Post = () => {
     setComments(data.post.comments);
   }, []);
   return (
-    <div className="post-container">
+    <div className="common-container">
+      <Navbar />
       <div
-        className="common-container post-container"
+        className="main-container post-container"
         style={editing ? { display: "none" } : {}}
       >
-        <NavList />
-        <div className="main-container">
-          <Navbar />
+        <div className="left">
+          <NavList />
+        </div>
+        <div className="middle">
           <Postcard item={post} key={post._id} post={post} />
           <div>
             <div className="avatar-textarea-container">
@@ -146,7 +148,6 @@ export const Post = () => {
               );
             })}
         </div>
-        <PeoplesList />
       </div>
       {editing ? (
         <div className="edit" style={{ backgroundColor: "white" }}>
@@ -182,6 +183,9 @@ export const Post = () => {
           </div>
         </div>
       ) : null}
+      <div className="right">
+        <PeoplesList />
+      </div>
     </div>
   );
 };

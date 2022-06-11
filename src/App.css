@@ -37,10 +37,12 @@
 .common-container{
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .main-container{
   width: 100vw;
   display: flex;
+  flex-grow: 1;
 }
 .left{
   flex-basis: 250px;
@@ -65,6 +67,9 @@
   }
   .right{
     display: none;
+  }
+  .common-container{
+    height: 100vh;
   }
 }
 .edit-page{
@@ -117,4 +122,14 @@
   position: absolute;
   top: 40vh;
   left: 25vw;  
+}
+
+.mobile-navigation{
+  position: sticky;
+  display: flex;
+  bottom: 0;
+  justify-content: space-around;
+  align-items: center;
+  padding: .5rem 0;
+  background-color: var(--secondary-color);
 }
