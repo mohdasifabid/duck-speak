@@ -51,15 +51,29 @@ export const PostMaker = () => {
         ></textarea>
       </div>
       <div className="bottom-container">
-        <button
-          className="speak-btn"
-          onClick={() => {
-            postThePost();
-            setNewPost("");
-          }}
-        >
-          speak
-        </button>
+        {newPost === "" ? (
+          <button
+            style={{ backgroundColor: "gray" }}
+            className="speak-btn"
+            onClick={() => {
+              postThePost();
+              setNewPost("");
+            }}
+            disabled
+          >
+            speak
+          </button>
+        ) : (
+          <button
+            className="speak-btn"
+            onClick={() => {
+              postThePost();
+              setNewPost("");
+            }}
+          >
+            speak
+          </button>
+        )}
       </div>
     </div>
   ) : null;
