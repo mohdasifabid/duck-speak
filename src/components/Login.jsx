@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthProvider } from "../authProvider";
 import "./Login.css";
+import { postCall } from "./ReusableFunctions";
 export const Login = () => {
   const { state: authState, dispatch: authDispatch } = useAuthProvider();
   const [username, setUsername] = useState("");
@@ -20,7 +21,15 @@ export const Login = () => {
       navigate("/home");
     }
   };
-
+  const guestLoginHandler = async () => {
+    const data = await postCall("/api/auth/login", {
+      username: "duckspeak",
+      password: "duckSpeak123",
+    });
+    authDispatch({ type: "LOGIN_STATUS", payload: true });
+    localStorage.setItem("encodedToken", response.data.encodedToken);
+    navigate("/home");
+  };
   return (
     <div className="login">
       <div className="login-container">
@@ -41,7 +50,9 @@ export const Login = () => {
         <button className="login-btn" onClick={loginHandler}>
           Login
         </button>
-
+        <button className="login-btn" onClick={guestLoginHandler}>
+          Login as guest
+        </button>
         <p>
           New user?
           <Link to="/signup">Create account</Link>
