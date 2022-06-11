@@ -178,29 +178,15 @@ export const Postcard = ({ item }) => {
         </div>
       </div>
       <div className="user-action-icons-container">
-        {authState.isLoggedIn ? (
-          likes ? (
-            <span>
-              <i
-                className="fa-regular fa-heart"
-                onClick={() => postDislike(item._id)}
-              ></i>
-              {likes}
-            </span>
-          ) : (
-            <span>
-              <i
-                className="fa-regular fa-heart"
-                onClick={() => postLike(item._id)}
-              ></i>
-              {likes}
-            </span>
-          )
-        ) : likes ? (
+        {likes ? (
           <span>
             <i
               className="fa-regular fa-heart"
-              onClick={() => navigate("/login")}
+              onClick={() =>
+                authState.isLoggedIn
+                  ? postDislike(item._id)
+                  : navigate("/login")
+              }
             ></i>
             {likes}
           </span>
@@ -208,7 +194,9 @@ export const Postcard = ({ item }) => {
           <span>
             <i
               className="fa-regular fa-heart"
-              onClick={() => navigate("/login")}
+              onClick={() =>
+                authState.isLoggedIn ? postLike(item._id) : navigate("/login")
+              }
             ></i>
             {likes}
           </span>
