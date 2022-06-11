@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthProvider } from "../authProvider";
 import "./Login.css";
 export const Login = () => {
-  const { state: authState } = useAuthProvider();
+  const { state: authState, dispatch: authDispatch } = useAuthProvider();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -15,6 +15,7 @@ export const Login = () => {
       password: password,
     });
     if (response.status === 200) {
+      authDispatch({ type: "LOGIN_STATUS", payload: true });
       localStorage.setItem("encodedToken", response.data.encodedToken);
       navigate("/home");
     }
