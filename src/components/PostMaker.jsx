@@ -4,6 +4,7 @@ import "./PostMaker.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 export const PostMaker = () => {
+  const { state: authState, dispatch: authDispatch } = usePostProvider();
   const { state, dispatch } = usePostProvider();
   const [newPost, setNewPost] = useState("");
   const postThePost = async () => {
@@ -25,7 +26,7 @@ export const PostMaker = () => {
       dispatch({ type: "GET_POSTS", payload: response.data.posts });
     }
   };
-  return (
+  return authState.isLoggedIn ? (
     <div>
       <div className="avatar-textarea-container">
         <Link to="/home">
@@ -60,5 +61,5 @@ export const PostMaker = () => {
         </button>
       </div>
     </div>
-  );
+  ) : null;
 };
