@@ -1,12 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { usePostProvider } from "../postProvider";
+import { useAuthProvider } from "../authProvider";
 import "./PostCard.css";
 
 export const Postcard = ({ item }) => {
   const { state, dispatch } = usePostProvider();
+  const { state: authState, dispatch: authDispatch } = useAuthProvider();
   const [likes, setLikes] = useState(null);
+  const navigate = useNavigate();
 
   const getPost = async (id) => {
     const token = localStorage.getItem("encodedToken");
@@ -175,11 +178,29 @@ export const Postcard = ({ item }) => {
         </div>
       </div>
       <div className="user-action-icons-container">
-        {likes ? (
+        {authState.isLoggedIn ? (
+          likes ? (
+            <span>
+              <i
+                className="fa-regular fa-heart"
+                onClick={() => postDislike(item._id)}
+              ></i>
+              {likes}
+            </span>
+          ) : (
+            <span>
+              <i
+                className="fa-regular fa-heart"
+                onClick={() => postLike(item._id)}
+              ></i>
+              {likes}
+            </span>
+          )
+        ) : likes ? (
           <span>
             <i
               className="fa-regular fa-heart"
-              onClick={() => postDislike(item._id)}
+              onClick={() => navigate("/login")}
             ></i>
             {likes}
           </span>
@@ -187,7 +208,7 @@ export const Postcard = ({ item }) => {
           <span>
             <i
               className="fa-regular fa-heart"
-              onClick={() => postLike(item._id)}
+              onClick={() => navigate("/login")}
             ></i>
             {likes}
           </span>
