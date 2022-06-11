@@ -239,7 +239,9 @@ export const Postcard = ({ item }) => {
             <i
               className="fa-solid fa-bookmark"
               onClick={() => {
-                deleteBookMark(item._id);
+                authState.isLoggedIn
+                  ? deleteBookMark(item._id)
+                  : navigate("/login");
               }}
             ></i>
           </span>
@@ -248,7 +250,9 @@ export const Postcard = ({ item }) => {
             <i
               className="fa-regular fa-bookmark"
               onClick={() => {
-                postBookMark(item._id);
+                authState.isLoggedIn
+                  ? postBookMark(item._id)
+                  : navigate("/login");
               }}
             ></i>
           </span>
