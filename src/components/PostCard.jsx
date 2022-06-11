@@ -224,11 +224,15 @@ export const Postcard = ({ item }) => {
           ></i>
           {item.comments && item.comments.length}
         </span>
-        <Link to={`/edit/${item._id}`}>
-          <span>
-            <i className="fa-solid fa-pen-to-square"></i>
-          </span>
-        </Link>
+        <span
+          onClick={() =>
+            authState.isLoggedIn
+              ? navigate(`/edit/${item._id}`)
+              : navigate("/login")
+          }
+        >
+          <i className="fa-solid fa-pen-to-square"></i>
+        </span>
 
         {isMarked !== -1 ? (
           <span>
