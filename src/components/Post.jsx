@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { Navbar } from "./Navbar";
 import { NavList } from "./NavList";
 import { PeoplesList } from "./PeopleList";
@@ -15,6 +15,7 @@ export const Post = () => {
   const [editing, setEditing] = useState(false);
   const [updateThisComment, setUpdateThisComment] = useState({});
   const [textToUpdateThisCommenet, setTextToUpdateThisCommenet] = useState("");
+  const navigate = useNavigate();
   useEffect(async () => {
     let data = await getCall(`/api/posts/${id}`);
     setPost(data.post);
@@ -25,7 +26,7 @@ export const Post = () => {
     <div className="post-container">
       <div
         className="common-container post-container"
-        style={editing ? { display: "none" } : null}
+        style={editing ? { display: "none" } : {}}
       >
         <NavList />
         <div className="main-container">
@@ -137,26 +138,25 @@ export const Post = () => {
             ></textarea>
           </div>
           <div className="bottom-container">
-            <Link to="/home">
-              <button
-                className="speak-btn"
-                onClick={async () => {
-                  let commentData = await postCall(
-                    `/api/comments/edit/${id}/${updateThisComment._id}`,
-                    {
-                      commentData: {
-                        ...updateThisComment,
-                        text: textToUpdateThisCommenet,
-                      },
-                    }
-                  );
-                  setComments(commentData.comments);
-                  setNewComment("");
-                }}
-              >
-                update
-              </button>
-            </Link>
+            <button
+              className="speak-btn"
+              onClick={async () => {
+                let commentData = await postCall(
+                  `/api/comments/edit/${id}/${updateThisComment._id}`,
+                  {
+                    commentData: {
+                      ...updateThisComment,
+                      text: textToUpdateThisCommenet,
+                    },
+                  }
+                );
+                setComments(commentData.comments);
+                setNewComment("");
+                setEditing(false);
+              }}
+            >
+              update
+            </button>
           </div>
         </div>
       ) : null}
