@@ -22,13 +22,15 @@ export const Login = () => {
     }
   };
   const guestLoginHandler = async () => {
-    const data = await postCall("/api/auth/login", {
+    const response = await axios.post("/api/auth/login", {
       username: "duckspeak",
       password: "duckSpeak123",
     });
-    authDispatch({ type: "LOGIN_STATUS", payload: true });
-    localStorage.setItem("encodedToken", response.data.encodedToken);
-    navigate("/home");
+    if (response.status === 200) {
+      authDispatch({ type: "LOGIN_STATUS", payload: true });
+      localStorage.setItem("encodedToken", response.data.encodedToken);
+      navigate("/home");
+    }
   };
   return (
     <div className="login">
