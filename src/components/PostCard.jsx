@@ -214,17 +214,16 @@ export const Postcard = ({ item }) => {
           </span>
         )}
 
-        <Link to={`/post/${item._id}`} className="comment-count-container">
-          <span>
-            <i
-              className="fa-regular fa-comment reply-icon"
-              onClick={() => {
-                dispatch({ type: "REPLYING", payload: true });
-              }}
-            ></i>
-            {item.comments && item.comments.length}
-          </span>
-        </Link>
+        <span>
+          <i
+            className="fa-regular fa-comment reply-icon"
+            onClick={() => {
+              dispatch({ type: "REPLYING", payload: true });
+              navigate(`/post/${item._id}`);
+            }}
+          ></i>
+          {item.comments && item.comments.length}
+        </span>
         <Link to={`/edit/${item._id}`}>
           <span>
             <i className="fa-solid fa-pen-to-square"></i>
