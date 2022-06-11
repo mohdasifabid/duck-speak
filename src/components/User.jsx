@@ -7,10 +7,13 @@ export const User = () => {
   const { state } = usePostProvider();
   return (
     <div className="common-container">
-      <NavList />
+      <Navbar />
+
       <div className="main-container">
-        <Navbar style={{ position: "fixed" }} />
-        <div>
+        <div className="left">
+          <NavList />
+        </div>
+        <div className="middle">
           <div className="img-container">
             <img
               className="cover-img"
@@ -43,8 +46,10 @@ export const User = () => {
             </p>
           </div>
         </div>
+        <div className="right">
+          <PeoplesList />
+        </div>
       </div>
-      <PeoplesList />
     </div>
   );
 };

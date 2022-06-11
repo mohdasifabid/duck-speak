@@ -25,16 +25,21 @@ export const BookMarked = () => {
   }, []);
   return (
     <div className="common-container">
-      <NavList />
+      <Navbar />
       <div className="main-container">
-        <Navbar />
-        {state.bookmarks.length === 0 && <h3>You have no bookmarks</h3>}
-        {state.bookmarks.map((item) => {
-          return <Postcard item={item} key={item._id} />;
-        })}
+        <div className="left">
+          <NavList />
+        </div>
+        <div className="middle">
+          {state.bookmarks.length === 0 && <h3>You have no bookmarks</h3>}
+          {state.bookmarks.map((item) => {
+            return <Postcard item={item} key={item._id} />;
+          })}
+        </div>
+        <div className="right">
+          <PeoplesList />
+        </div>
       </div>
-
-      <PeoplesList />
     </div>
   );
 };

@@ -1,9 +1,16 @@
 .duck-navbar-container{
-  border: 2px solid var(--secondary-color);
+  border-bottom: 2px solid var(--secondary-color);
   position: sticky;
   top: 0;
   background-color: white;
   z-index: 100;
+  padding: 0;
+  flex-basis: 45px;
+}
+.duck-navbar-item{ 
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .duck-navbar-home {
   margin-right: 4rem;
