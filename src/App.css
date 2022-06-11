@@ -60,7 +60,12 @@
   .navlist{
     display: none;
   }
-  
+  .left{
+    display: none;
+  }
+  .right{
+    display: none;
+  }
 }
 .edit-page{
   margin: 1rem 3rem;
