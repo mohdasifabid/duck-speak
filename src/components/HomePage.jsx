@@ -24,15 +24,21 @@ export const Home = () => {
   }, []);
   return (
     <div className="common-container">
-      <NavList />
+      <Navbar />
       <div className="main-container">
-        <Navbar />
-        <PostMaker />
-        {state.posts.map((post) => {
-          return <Postcard item={post} key={post._id} />;
-        })}
+        <div className="left">
+          <NavList />
+        </div>
+        <div className="middle">
+          <PostMaker />
+          {state.posts.map((post) => {
+            return <Postcard item={post} key={post._id} />;
+          })}
+        </div>
+        <div className="right">
+          <PeoplesList />
+        </div>
       </div>
-      <PeoplesList />
     </div>
   );
 };

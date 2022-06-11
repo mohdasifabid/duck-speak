@@ -1,5 +1,4 @@
 .duck-navbar-container{
-  max-height: 3.5rem;
   border: 2px solid var(--secondary-color);
   position: sticky;
   top: 0;
@@ -30,11 +29,21 @@
 
 .common-container{
   display: flex;
+  flex-direction: column;
 }
 .main-container{
+  width: 100vw;
+  display: flex;
+}
+.left{
+  flex-basis: 250px;
+}
+.middle{
   flex-grow: 1;
 }
-
+.right{
+  flex-basis: 250px;
+}
 @media (max-width: 520px){
   .navlist{
     display: none;
