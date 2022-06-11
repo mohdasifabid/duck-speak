@@ -3,8 +3,9 @@ import { usePostProvider } from "../postProvider";
 import "./PostMaker.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useAuthProvider } from "../authProvider";
 export const PostMaker = () => {
-  const { state: authState, dispatch: authDispatch } = usePostProvider();
+  const { state: authState, dispatch: authDispatch } = useAuthProvider();
   const { state, dispatch } = usePostProvider();
   const [newPost, setNewPost] = useState("");
   const postThePost = async () => {
