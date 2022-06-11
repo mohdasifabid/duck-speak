@@ -1,32 +1,24 @@
-import { useState } from "react";
-import { usePostProvider } from "../postProvider";
 import "./PostMaker.css";
-import axios from "axios";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { usePostProvider } from "../postProvider";
 import { useAuthProvider } from "../authProvider";
+import { postCall } from "./ReusableFunctions";
+
 export const PostMaker = () => {
-  const { state: authState, dispatch: authDispatch } = useAuthProvider();
-  const { state, dispatch } = usePostProvider();
+  const { state: authState } = useAuthProvider();
+  const { dispatch } = usePostProvider();
   const [newPost, setNewPost] = useState("");
-  const postThePost = async () => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.post(
-      "/api/posts",
-      {
-        postData: {
-          content: newPost,
-        },
+
+  const publishPostHandler = async () => {
+    const data = await postCall("/api/posts", {
+      postData: {
+        content: newPost,
       },
-      {
-        headers: {
-          authorization: token,
-        },
-      }
-    );
-    if (response.status === 201) {
-      dispatch({ type: "GET_POSTS", payload: response.data.posts });
-    }
+    });
+    dispatch({ type: "GET_POSTS", payload: data.posts });
   };
+
   return authState.isLoggedIn ? (
     <div>
       <div className="avatar-textarea-container">
@@ -56,7 +48,7 @@ export const PostMaker = () => {
             style={{ backgroundColor: "gray" }}
             className="speak-btn"
             onClick={() => {
-              postThePost();
+              publishPostHandler();
               setNewPost("");
             }}
             disabled
@@ -67,7 +59,7 @@ export const PostMaker = () => {
           <button
             className="speak-btn"
             onClick={() => {
-              postThePost();
+              publishPostHandler();
               setNewPost("");
             }}
           >
