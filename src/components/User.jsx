@@ -9,39 +9,6 @@ import { NavList } from "./NavList";
 import { PeoplesList } from "./PeopleList";
 export const User = () => {
   const { state } = usePostProvider();
-  // const [user, setUser] = useState([]);
-  // useEffect(() => {
-  //   const getUser = async (userId) => {
-  //     const token = localStorage.getItem("encodedToken");
-  //     const response = await axios.get(`/api/users/${userId}`, {
-  //       headers: {
-  //         authorization: token,
-  //       },
-  //     });
-  //     console.log("getting", response);
-  //     if (response.status === 200) {
-  //       setUser(response.data.user);
-  //     }
-  //   };
-  //   getUser(state.userID);
-  // }, []);
-
-  // const follow = async (id) => {
-  //   const token = localStorage.getItem("encodedToken");
-  //   const response = await axios.post(
-  //     `/api/users/follow/${id}`,
-  //     {},
-  //     {
-  //       headers: {
-  //         authorization: token,
-  //       },
-  //     }
-  //   );
-  //   if (response.status === 200) {
-  //     setUser(response.data.user);
-  //   }
-  // };
-
   return (
     <div className="common-container">
       <NavList />
