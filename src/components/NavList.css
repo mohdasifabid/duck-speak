@@ -1,17 +1,11 @@
 .navlist{
-    height: 100vh;
     position: sticky;
-    top:0;
-    /* flex-basis: 150px; */
-    border-right: 1px solid black;
-
+    top: 4.5rem;    
 }
 .navlist-content-container{
-    /* margin: 3.49rem 2rem 0 2rem; */
     margin: 1.5rem 1rem 0 3rem;
     width: 100%;
-    position: sticky;
-    top: 4.5rem;
+   
 }
 .navlist-content-container div{
     margin-bottom: 1rem;
