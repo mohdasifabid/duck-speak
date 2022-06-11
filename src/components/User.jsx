@@ -9,38 +9,38 @@ import { NavList } from "./NavList";
 import { PeoplesList } from "./PeopleList";
 export const User = () => {
   const { state } = usePostProvider();
-  const [user, setUser] = useState([]);
-  useEffect(() => {
-    const getUser = async (userId) => {
-      const token = localStorage.getItem("encodedToken");
-      const response = await axios.get(`/api/users/${userId}`, {
-        headers: {
-          authorization: token,
-        },
-      });
-      console.log("getting", response);
-      if (response.status === 200) {
-        setUser(response.data.user);
-      }
-    };
-    getUser(state.userID);
-  }, []);
+  // const [user, setUser] = useState([]);
+  // useEffect(() => {
+  //   const getUser = async (userId) => {
+  //     const token = localStorage.getItem("encodedToken");
+  //     const response = await axios.get(`/api/users/${userId}`, {
+  //       headers: {
+  //         authorization: token,
+  //       },
+  //     });
+  //     console.log("getting", response);
+  //     if (response.status === 200) {
+  //       setUser(response.data.user);
+  //     }
+  //   };
+  //   getUser(state.userID);
+  // }, []);
 
-  const follow = async (userId) => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.post(
-      `/api/users/follow/${userId}`,
-      {},
-      {
-        headers: {
-          authorization: token,
-        },
-      }
-    );
-    if (response.status === 200) {
-      setUser(response.data.user);
-    }
-  };
+  // const follow = async (id) => {
+  //   const token = localStorage.getItem("encodedToken");
+  //   const response = await axios.post(
+  //     `/api/users/follow/${id}`,
+  //     {},
+  //     {
+  //       headers: {
+  //         authorization: token,
+  //       },
+  //     }
+  //   );
+  //   if (response.status === 200) {
+  //     setUser(response.data.user);
+  //   }
+  // };
 
   return (
     <div className="common-container">
@@ -63,24 +63,20 @@ export const User = () => {
           <div className="btn-container">
             <button
               className="follow-btn duck-primary-btn-s duck-primary-btn"
-              onClick={() => follow(state.userID)}
+              // onClick={() => follow(user._id)}
             >
               Follow
             </button>
           </div>
           <div className="userInfo-container">
             <p className="name-and-userId">
-              <strong>{`${user.firstName} ${user.lastName}`}</strong>
-              <small>{`@${user.username}`}</small>
+              {/* <strong>{`${user.firstName} ${user.lastName}`}</strong> */}
+              {/* <small>{`@${user.username}`}</small> */}
             </p>
             <p>Joined May 2022</p>
             <p>
-              <span>
-                <strong>{user.following}</strong>Following
-              </span>
-              <span>
-                <strong>{user.followers}</strong>Followes
-              </span>
+              <span>{/* <strong>{user.following}</strong>Following */}</span>
+              <span>{/* <strong>{user.followers}</strong>Followes */}</span>
             </p>
           </div>
         </div>

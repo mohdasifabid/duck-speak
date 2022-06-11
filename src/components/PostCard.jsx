@@ -130,7 +130,6 @@ export const Postcard = ({ item }) => {
       });
     }
   };
-
   const findUserId = (username) => {
     let clickedUser = state.users.find((user) => user.username === username);
     dispatch({ type: "GET_USER_ID", payload: clickedUser._id });
