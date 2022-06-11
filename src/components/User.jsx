@@ -1,8 +1,4 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { Navbar } from "./Navbar";
-import { Postcard } from "./PostCard";
 import { usePostProvider } from "../postProvider";
 import "./User.css";
 import { NavList } from "./NavList";
@@ -12,7 +8,7 @@ export const User = () => {
   return (
     <div className="common-container">
       <NavList />
-      <div>
+      <div className="main-container">
         <Navbar style={{ position: "fixed" }} />
         <div>
           <div className="img-container">
@@ -47,7 +43,6 @@ export const User = () => {
             </p>
           </div>
         </div>
-        {/* <Postcard /> */}
       </div>
       <PeoplesList />
     </div>
