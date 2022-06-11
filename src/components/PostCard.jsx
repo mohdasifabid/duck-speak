@@ -258,11 +258,14 @@ export const Postcard = ({ item }) => {
           </span>
         )}
 
-        <span>
-          <i
-            className="fa-solid fa-trash"
-            onClick={() => deletePostHandler(item._id)}
-          ></i>
+        <span
+          onClick={() =>
+            authState.isLoggedIn
+              ? deletePostHandler(item._id)
+              : navigate("/login")
+          }
+        >
+          <i className="fa-solid fa-trash"></i>
         </span>
       </div>
     </div>
