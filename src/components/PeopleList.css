@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    padding: 0;
 }
 .pList-input-container{
     display: flex;
@@ -15,9 +15,9 @@
     background-color: white;
 }
 .pList-input{
-    margin: 2rem;
+    /* margin: 2rem; */
     border-radius: .5rem;
-    padding: .225rem 0rem .225rem .5rem;
+    /* padding: .225rem 0rem .225rem .5rem; */
     border: 1.5px solid var(--secondary-color);
 }
 .pList-img{

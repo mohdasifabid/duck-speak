@@ -14,6 +14,7 @@ export const PeoplesList = () => {
     }
     return data;
   };
+
   let filteredUsers = filterByUsername(state.users, userInput);
   return (
     <div className="pList">
