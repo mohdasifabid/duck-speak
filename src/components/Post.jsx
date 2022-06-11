@@ -21,7 +21,6 @@ export const Post = () => {
     setPost(data.post);
     setComments(data.post.comments);
   }, []);
-
   return (
     <div className="post-container">
       <div
@@ -41,18 +40,41 @@ export const Post = () => {
               ></textarea>
             </div>
             <div className="bottom-container">
-              <button
-                className="speak-btn"
-                onClick={async () => {
-                  let commentData = await postCall(`/api/comments/add/${id}`, {
-                    commentData: { text: newComment },
-                  });
-                  setComments(commentData.comments);
-                  setNewComment("");
-                }}
-              >
-                reply
-              </button>
+              {newComment === "" ? (
+                <button
+                  disabled
+                  style={{ backgroundColor: "gray" }}
+                  className="speak-btn"
+                  onClick={async () => {
+                    let commentData = await postCall(
+                      `/api/comments/add/${id}`,
+                      {
+                        commentData: { text: newComment },
+                      }
+                    );
+                    setComments(commentData.comments);
+                    setNewComment("");
+                  }}
+                >
+                  reply
+                </button>
+              ) : (
+                <button
+                  className="speak-btn"
+                  onClick={async () => {
+                    let commentData = await postCall(
+                      `/api/comments/add/${id}`,
+                      {
+                        commentData: { text: newComment },
+                      }
+                    );
+                    setComments(commentData.comments);
+                    setNewComment("");
+                  }}
+                >
+                  reply
+                </button>
+              )}
             </div>
           </div>
           {comments &&
