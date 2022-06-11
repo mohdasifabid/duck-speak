@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthProvider } from "../authProvider";
 import "./Login.css";
-import { postCall } from "./ReusableFunctions";
 export const Login = () => {
   const { state: authState, dispatch: authDispatch } = useAuthProvider();
   const [username, setUsername] = useState("");
@@ -26,6 +25,7 @@ export const Login = () => {
       username: "duckspeak",
       password: "duckSpeak123",
     });
+    console.log(response);
     if (response.status === 200) {
       authDispatch({ type: "LOGIN_STATUS", payload: true });
       localStorage.setItem("encodedToken", response.data.encodedToken);
