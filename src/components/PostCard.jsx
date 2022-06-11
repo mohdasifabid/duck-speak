@@ -1,10 +1,9 @@
 import "./PostCard.css";
-import axios from "axios";
 import { useState } from "react";
 import { usePostProvider } from "../postProvider";
 import { useAuthProvider } from "../authProvider";
 import { Link, useNavigate } from "react-router-dom";
-import { getCall } from "./ReusableFunctions";
+import { deleteCall, getCall, postCall } from "./ReusableFunctions";
 
 export const Postcard = ({ item }) => {
   const { state, dispatch } = usePostProvider();
@@ -16,113 +15,30 @@ export const Postcard = ({ item }) => {
     const data = await getCall(`/api/posts/${id}`);
     dispatch({ type: "GET_POST", payload: data.post });
   };
+
   const deletePostHandler = async (id) => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.delete(`/api/posts/${id}`, {
-      headers: {
-        authorization: token,
-      },
-    });
-    if (response.status === 201) {
-      const token = localStorage.getItem("encodedToken");
-      const getPosts = async () => {
-        const response = await axios.get("/api/posts", {
-          headers: {
-            authorization: token,
-          },
-        });
-        if (response.status === 200) {
-          dispatch({ type: "GET_POSTS", payload: response.data.posts });
-        }
-      };
-      getPosts();
-    }
+    const data = await deleteCall(`/api/posts/${id}`);
+    dispatch({ type: "GET_POSTS", payload: data.posts });
   };
+
   const postLike = async (id) => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.post(
-      `/api/posts/like/${id}`,
-      {},
-      {
-        headers: {
-          authorization: token,
-        },
-      }
-    );
-    if (response.status === 201) {
-      const getPost = async (id) => {
-        const response = await axios.get(`/api/posts/${id}`, {
-          headers: {
-            authorization: token,
-          },
-        });
-        if (response.status === 200) {
-          setLikes(response.data.post.likes.likeCount);
-        }
-      };
-      getPost(id);
-    }
+    const data = await postCall(`/api/posts/like/${id}`, {});
+    setLikes(data.post.likes.likeCount);
   };
 
   const postDislike = async (id) => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.post(
-      `/api/posts/dislike/${id}`,
-      {},
-      {
-        headers: {
-          authorization: token,
-        },
-      }
-    );
-    if (response.status === 201) {
-      const getPost = async (id) => {
-        const response = await axios.get(`/api/posts/${id}`, {
-          headers: {
-            authorization: token,
-          },
-        });
-        if (response.status === 200) {
-          setLikes(response.data.post.likes.likeCount);
-        }
-      };
-      getPost(id);
-    }
+    const data = await postCall(`/api/posts/dislike/${id}`, {});
+    setLikes(data.post.likes.likeCount);
   };
 
   const postBookMark = async (id) => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.post(
-      `/api/users/bookmark/${id}`,
-      {},
-      {
-        headers: {
-          authorization: token,
-        },
-      }
-    );
-    if (response.status === 200) {
-      dispatch({ type: "GET_BOOKMARKED", payload: response.data.bookmarks });
-    }
+    const data = await postCall(`/api/users/bookmark/${id}`, {});
+    dispatch({ type: "GET_BOOKMARKED", payload: data.bookmarks });
   };
 
   const deleteBookMark = async (id) => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.post(
-      `/api/users/remove-bookmark/${id}`,
-      {},
-      {
-        headers: {
-          authorization: token,
-        },
-      }
-    );
-    if (response.status === 200) {
-      dispatch({
-        type: "GET_BOOKMARKED",
-        payload: response.data.bookmarks,
-      });
-    }
+    const data = await postCall(`/api/users/remove-bookmark/${id}`, {});
+    dispatch({ type: "GET_BOOKMARKED", payload: data.bookmarks });
   };
   const findUserId = (username) => {
     let clickedUser = state.users.find((user) => user.username === username);
