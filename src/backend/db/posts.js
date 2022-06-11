@@ -9,20 +9,20 @@ import { formatDate } from "../utils/authUtils";
 export const posts = [
   {
     _id: uuid(),
-    content: "Hello World, how are you feeling, its really great",
+    content: "Hello World!",
     likes: {
       likeCount: 0,
       likedBy: [],
       dislikedBy: [],
     },
-    username: "adarshbalika",
+    username: "banana",
     createdAt: formatDate(),
     updatedAt: formatDate(),
     comments: [
       {
         _id: uuid(),
-        username: "shubhamsoni",
-        text: "Interesting",
+        username: "dragonfruit",
+        text: "Good",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -30,8 +30,8 @@ export const posts = [
       },
       {
         _id: uuid(),
-        username: "sohamshah",
-        text: "Wow!",
+        username: "orange",
+        text: "Amazing bro!",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
