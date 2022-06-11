@@ -249,7 +249,8 @@ export const Postcard = ({ item }) => {
         <span
           onClick={() =>
             authState.isLoggedIn
-              ? deletePostHandler(item._id)
+              ? deletePostHandler(item._id) &&
+                alert("Are you sure to delete thid post?")
               : navigate("/login")
           }
         >

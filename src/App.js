@@ -6,7 +6,7 @@ import { Post } from "./components/Post";
 import { Login } from "./components/Login";
 import { Reply } from "./components/Reply";
 import { Signup } from "./components/SignUp";
-import { Home } from "./components/HomePage";
+import { Home } from "./components/HomePage"; 
 import { usePostProvider } from "./postProvider";
 import { useAuthProvider } from "./authProvider";
 import { Routes, Route } from "react-router-dom"
