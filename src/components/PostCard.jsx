@@ -1,26 +1,20 @@
+import "./PostCard.css";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { usePostProvider } from "../postProvider";
 import { useAuthProvider } from "../authProvider";
-import "./PostCard.css";
+import { Link, useNavigate } from "react-router-dom";
+import { getCall } from "./ReusableFunctions";
 
 export const Postcard = ({ item }) => {
   const { state, dispatch } = usePostProvider();
-  const { state: authState, dispatch: authDispatch } = useAuthProvider();
+  const { state: authState } = useAuthProvider();
   const [likes, setLikes] = useState(null);
   const navigate = useNavigate();
 
   const getPost = async (id) => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.get(`/api/posts/${id}`, {
-      headers: {
-        authorization: token,
-      },
-    });
-    if (response.status === 200) {
-      dispatch({ type: "GET_POST", payload: response.data.post });
-    }
+    const data = await getCall(`/api/posts/${id}`);
+    dispatch({ type: "GET_POST", payload: data.post });
   };
   const deletePostHandler = async (id) => {
     const token = localStorage.getItem("encodedToken");
