@@ -6,12 +6,15 @@
     display: flex;
     padding: .25rem;
 }
-.post-content{
+.sm-post-content{
     padding: 0 0 0 1rem ;
+    font-size: small;
+    display: flex;
+    flex-direction: column;
 }
-.post-content p {
-    margin-top: 0;
-    margin-bottom: .25rem;
+.sm-post-content a {
+    margin-bottom: 1rem;
+    margin-top: .5rem;
     font-size: small;
 }
 .user-action-icons-container{
@@ -38,4 +41,10 @@
 }
 .textContent-container{
     word-break: break-all;
+}
+
+.sm-postcard-avatar{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
 }

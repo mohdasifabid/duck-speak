@@ -45,45 +45,39 @@ export const Postcard = ({ item }) => {
     dispatch({ type: "GET_USER_ID", payload: clickedUser._id });
   };
   const isMarked = state.bookmarks.findIndex((post) => post._id === item._id);
+
   return (
     <div className="postcard-container">
       <div className="avatar-content-container">
-        <Link
-          to={`/user/${item.username}`}
-          onClick={() => findUserId(item.username)}
+        <a
+          className="sm-postcard-avatar-container"
+          onClick={() => {
+            findUserId(item.username);
+            navigate(`/user/${item.username}`);
+          }}
         >
-          <div className="duck-avatar-badge duck-avatar-badge-m">
-            <img
-              src="https://picsum.photos/id/1062/367/267"
-              alt=""
-              className="duck-avatar-badge-img"
-            />
-          </div>
-        </Link>
-
-        <div className="post-content">
-          <p>
+          <img
+            src="https://picsum.photos/id/1062/367/267"
+            alt=""
+            className="sm-postcard-avatar"
+          />
+        </a>
+        <div className="sm-post-content">
+          <span>
             <strong>{`${item.username}${" "}`}</strong>
             {new Date(item.createdAt).getHours()} hours ago
-          </p>
-          <Link
-            to={`/post/${item._id}`}
-            style={{
-              cursor: "pointer",
-              textDecoration: "none",
-              color: "black",
+          </span>
+
+          <a
+            onClick={() => {
+              getPost(item._id);
+              dispatch({ type: "REPLYING", payload: false });
+              navigate(`/post/${item._id}`);
             }}
+            className="textContent-container"
           >
-            <p
-              onClick={() => {
-                getPost(item._id);
-                dispatch({ type: "REPLYING", payload: false });
-              }}
-              className="textContent-container"
-            >
-              {item.content}
-            </p>
-          </Link>
+            {item.content}
+          </a>
         </div>
       </div>
       <div className="user-action-icons-container">
