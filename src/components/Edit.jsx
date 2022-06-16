@@ -1,7 +1,7 @@
 import axios from "axios";
+import { Layout } from "./Layout";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Navbar } from "./Navbar";
 
 export const Edit = () => {
   const { id } = useParams();
@@ -40,26 +40,23 @@ export const Edit = () => {
     }
   };
   return (
-    <div>
-      <Navbar />
-      <div className="edit-page">
-        <div className="avatar-textarea-container">
-          <textarea
-            id="createPostHere"
-            value={post.content}
-            className="textarea"
-            placeholder="Whats happening?"
-            onChange={(e) => {
-              setPost({ ...post, content: e.target.value });
-            }}
-          ></textarea>
-        </div>
-        <div className="bottom-container">
-          <button className="speak-btn" onClick={() => postEditedPost(id)}>
-            update
-          </button>
-        </div>
+    <Layout>
+      <div className="avatar-textarea-container">
+        <textarea
+          id="createPostHere"
+          value={post.content}
+          className="textarea"
+          placeholder="Whats happening?"
+          onChange={(e) => {
+            setPost({ ...post, content: e.target.value });
+          }}
+        ></textarea>
       </div>
-    </div>
+      <div className="bottom-container">
+        <button className="speak-btn" onClick={() => postEditedPost(id)}>
+          update
+        </button>
+      </div>
+    </Layout>
   );
 };
