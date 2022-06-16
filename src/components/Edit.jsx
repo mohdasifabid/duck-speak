@@ -33,7 +33,7 @@ export const Edit = () => {
           }}
         ></textarea>
       </div>
-      <div className="sm-sm-postmaker-and-postcard-bottom-container">
+      <div className="sm-postmaker-and-postcard-bottom-container">
         <button className="speak-btn" onClick={() => updatedPostHandler(id)}>
           update
         </button>
