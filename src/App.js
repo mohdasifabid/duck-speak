@@ -4,7 +4,6 @@ import { Edit } from "./components/Edit";
 import { User } from "./components/User";
 import { Post } from "./components/Post";
 import { Login } from "./components/Login";
-import { Reply } from "./components/Reply";
 import { Signup } from "./components/SignUp";
 import { Home } from "./components/HomePage";
 import { usePostProvider } from "./postProvider";
@@ -37,7 +36,6 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/edit/:id" element={<Edit />} />
-        <Route path="/reply/:id" element={<Reply />} />
         <Route path="/user/:username" element={<User />} />
         <Route path="/postmaker" element={<PostMaker />} />
         <Route path="/bookmarked" element={<BookMarked />} />

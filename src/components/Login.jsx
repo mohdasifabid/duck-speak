@@ -22,8 +22,8 @@ export const Login = () => {
   };
   const guestLoginHandler = async () => {
     const response = await axios.post("/api/auth/login", {
-      username: "duckspeak",
-      password: "duckSpeak123",
+      username: "guestuser",
+      password: "guestUser123",
     });
     console.log(response);
     if (response.status === 200) {

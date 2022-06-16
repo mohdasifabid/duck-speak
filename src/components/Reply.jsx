@@ -1,23 +1,15 @@
-import { useParams } from "react-router-dom";
-import { useState } from "react";
 import "./Reply.css";
-import axios from "axios";
+import { useState } from "react";
+import { postCall } from "./ReusableFunctions";
+
 export const Reply = ({ item }) => {
   const [comment, setComment] = useState("");
   const postComment = async (itemId) => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.post(`/api/comments/add/${itemId}`, [
-      {
-        commentData: comment,
-      },
-
-      {
-        headers: {
-          authorization: token,
-        },
-      },
-    ]);
+    const data = await postCall(`/api/comments/add/${itemId}`, {
+      commentData: comment,
+    });
   };
+
   return (
     <div>
       <div className="avatar-textarea-container">

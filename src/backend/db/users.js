@@ -23,12 +23,22 @@ export const users = [
     password: "mango123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-  },{
+  },
+  {
     _id: uuid(),
     firstName: "Mr",
     lastName: "Watermelon",
     username: "watermelon",
     password: "watermelon123",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+  },
+  {
+    _id: uuid(),
+    firstName: "Mr",
+    lastName: "Guest",
+    username: "guestuser",
+    password: "guestUser123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
