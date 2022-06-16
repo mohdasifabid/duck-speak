@@ -19,7 +19,7 @@ export const Reply = ({ item }) => {
           onChange={(e) => setComment(e.target.value)}
         ></textarea>
       </div>
-      <div className="bottom-container">
+      <div className="sm-postmaker-and-postcard-bottom-container">
         <button className="speak-btn" onClick={() => postComment(item.id)}>
           reply
         </button>

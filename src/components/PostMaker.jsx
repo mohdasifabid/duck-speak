@@ -1,9 +1,8 @@
 import "./PostMaker.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { postCall } from "./ReusableFunctions";
 import { usePostProvider } from "../postProvider";
 import { useAuthProvider } from "../authProvider";
-import { postCall } from "./ReusableFunctions";
 
 export const PostMaker = () => {
   const { state: authState } = useAuthProvider();
@@ -21,16 +20,14 @@ export const PostMaker = () => {
 
   return authState.isLoggedIn ? (
     <div>
-      <div className="avatar-textarea-container">
-        <Link to="/home">
-          <div className="duck-avatar-badge duck-avatar-badge-l">
-            <img
-              src="https://picsum.photos/id/1062/367/267"
-              alt=""
-              className="duck-avatar-badge-img"
-            />
-          </div>
-        </Link>
+      <div className="sm-postmaker-avatar-and-textarea-container">
+        <a className="sm-postmaker-avatar-container">
+          <img
+            src="https://picsum.photos/id/1062/367/267"
+            alt=""
+            className="sm-postmaker-avatar"
+          />
+        </a>
         <textarea
           id="createPostHere"
           style={newPost.length > 150 ? { color: "red" } : {}}
@@ -42,7 +39,7 @@ export const PostMaker = () => {
           }}
         ></textarea>
       </div>
-      <div className="bottom-container">
+      <div className="sm-postmaker-and-postcard-bottom-container">
         {newPost === "" ? (
           <button
             style={{ backgroundColor: "gray" }}

@@ -26,7 +26,7 @@ export const Post = () => {
             onChange={(e) => setNewComment(e.target.value)}
           ></textarea>
         </div>
-        <div className="bottom-container">
+        <div className="sm-postmaker-and-postcard-bottom-container">
           {newComment === "" ? (
             <button
               disabled
