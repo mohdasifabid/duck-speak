@@ -19,6 +19,7 @@ import { PrivateRoute } from "./components/PrivateRoute";
 function App() {
   const { state: authState, dispatch: authDispatch } = useAuthProvider();
   const { dispatch } = usePostProvider();
+
   useEffect(async () => {
     const token = localStorage.getItem("encodedToken");
     if (token) {

@@ -1,44 +1,25 @@
-import axios from "axios";
 import { Layout } from "./Layout";
 import { useEffect, useState } from "react";
+import { getCall, postCall } from "./ReusableFunctions";
 import { useNavigate, useParams } from "react-router-dom";
 
 export const Edit = () => {
   const { id } = useParams();
   const [post, setPost] = useState({});
   const navigate = useNavigate();
-  useEffect(() => {
-    const getPost = async (id) => {
-      const token = localStorage.getItem("encodedToken");
-      const response = await axios.get(`/api/posts/${id}`, {
-        headers: {
-          authorization: token,
-        },
-      });
-      if (response.status === 200) {
-        setPost(response.data.post);
-      }
-    };
-    getPost(id);
+
+  useEffect(async () => {
+    const data = await getCall(`/api/posts/${id}`);
+    setPost(data.post);
   }, []);
 
-  const postEditedPost = async (id) => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.post(
-      `/api/posts/edit/${id}`,
-      {
-        postData: post,
-      },
-      {
-        headers: {
-          authorization: token,
-        },
-      }
-    );
-    if (response.status === 201) {
-      navigate("/home");
-    }
+  const updatedPostHandler = async (id) => {
+    const data = await postCall(`/api/posts/edit/${id}`, {
+      postData: post,
+    });
+    navigate("/home");
   };
+
   return (
     <Layout>
       <div className="avatar-textarea-container">
@@ -53,7 +34,7 @@ export const Edit = () => {
         ></textarea>
       </div>
       <div className="bottom-container">
-        <button className="speak-btn" onClick={() => postEditedPost(id)}>
+        <button className="speak-btn" onClick={() => updatedPostHandler(id)}>
           update
         </button>
       </div>
