@@ -5,26 +5,24 @@
 .navlist-content-container{
     margin: 1.5rem 1rem 0 3rem;
     width: 100%;
-   
+    display: flex;
+    flex-direction: column;
 }
-.navlist-content-container div{
+.navlist-content-container a{
     margin-bottom: 1rem;
     padding: 0 1.5rem 0 .5rem;
+    cursor: pointer;
 }
 .navlist-btn{
     border: none;
     cursor: pointer;
-    text-decoration: none;
     border: 1.5px solid var(--secondary-color);
     color: var(--primary-color);
     font-size: small;
-    padding: .1rem .5rem;
+    padding: .5rem 0;
+    width: 8rem;
     
 }
-.navlist-content-container div i {
+.navlist-content-container a i {
     margin-right: .5rem;
-}
-.navlist-links{
-    text-decoration: none;
-    color: var(--primary-color);
 }
