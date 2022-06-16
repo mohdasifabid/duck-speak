@@ -4,7 +4,7 @@ export const Navbar = () => {
   const { state: authState } = useAuthProvider();
   return (
     <div className="duck-navbar-container">
-      <Link to="/home" className="duck-navbar-brand duck-navbar-item">
+      <Link to="/" className="duck-navbar-brand duck-navbar-item">
         speak
       </Link>
       {authState.isLoggedIn ? (

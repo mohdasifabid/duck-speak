@@ -17,7 +17,7 @@ export const Edit = () => {
     const data = await postCall(`/api/posts/edit/${id}`, {
       postData: post,
     });
-    navigate("/home");
+    navigate("/");
   };
 
   return (

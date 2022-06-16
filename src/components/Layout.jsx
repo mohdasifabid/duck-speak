@@ -20,7 +20,7 @@ export const Layout = ({ children }) => {
         </div>
       </div>
       <div className="sm-layout-mobile-navigation">
-        <a onClick={() => navigate("/home")}>
+        <a onClick={() => navigate("/")}>
           <i className="fa-solid fa-house"></i>
         </a>
         <a onClick={() => navigate("/bookmarked")}>

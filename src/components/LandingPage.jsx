@@ -12,7 +12,7 @@ export const LandingPage = () => {
             <a
               className="sm-lpage-heading"
               onClick={() => {
-                authState.isLoggedIn ? navigate("/home") : navigate("/login");
+                authState.isLoggedIn ? navigate("/") : navigate("/login");
               }}
             >
               Speak

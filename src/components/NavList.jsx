@@ -7,7 +7,7 @@ export const NavList = () => {
   return (
     <div className="navlist">
       <div className="navlist-content-container">
-        <a onClick={() => navigate("/home")}>
+        <a onClick={() => navigate("/")}>
           <i className="fa-solid fa-house"></i>
           Home
         </a>

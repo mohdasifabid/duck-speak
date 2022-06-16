@@ -33,7 +33,7 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/edit/:id" element={<Edit />} />
         <Route path="/user/:username" element={<User />} />
@@ -42,11 +42,7 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/post/:id" element={<Post />} />
         </Route>
-        {authState.isLoggedIn ? (
-          <Route path="/" element={<Home />} />
-        ) : (
-          <Route path="/" element={<LandingPage />} />
-        )}
+
         {authState.isLoggedIn ? (
           <Route path="/login" element={<Home />} />
         ) : (
