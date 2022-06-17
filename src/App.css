@@ -114,7 +114,7 @@
 .sm-layout{
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
 }
 .sm-layout-navbar-container{
   flex-basis: 45px;
@@ -142,6 +142,7 @@
 .sm-layout-mobile-navigation{
   position: sticky;
   display: flex;
+  flex-basis: 30px;
   bottom: 0;
   justify-content: space-around;
   align-items: center;
@@ -150,4 +151,9 @@
 }
 .sm-layout-mobile-navigation a{
   cursor: pointer;
+}
+@media(min-width: 520px){
+    .sm-layout-mobile-navigation{
+      display: none;
+    }
 }
