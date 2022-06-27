@@ -2,7 +2,7 @@
   border-bottom: 2px solid var(--secondary-color);
   background-color: white;
   padding: 0;
-  height: 100%;
+  height: inherit;
 }
 .duck-navbar-item{ 
   padding: 0;
@@ -37,7 +37,7 @@
   position: relative;
 }
 .main-container{
-  width: 100vw;
+  /* width: 100vw; */
   display: flex;
   flex-grow: 1;
 }
@@ -114,13 +114,14 @@
 .sm-layout{
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  /* height: 100vh; */
+  flex-grow: 1;
 }
 .sm-layout-navbar-container{
-  flex-basis: 45px;
   position: sticky;
   top: 0;
   z-index: 1000;
+  height: 50px;
 }
 .sm-layout-childs-container{
   flex-grow: 1;
