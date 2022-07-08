@@ -66,7 +66,9 @@ export const Signup = () => {
         </button>
         <p>
           Already a user?
-          <Link to="/login">Login here</Link>
+          <a className="btn-link" onClick={() => navigate("/login")}>
+            Login here
+          </a>
         </p>
       </div>
     </div>
