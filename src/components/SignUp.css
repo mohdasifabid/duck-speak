@@ -20,7 +20,17 @@
 }
 
 .signup-btn{
-    padding: .5rem 5.76rem;
+    padding: .75rem 5.76rem;
     margin-top: .5rem;
     cursor: pointer;
+    border: none
+}
+.signup-btn:hover{
+    color: #fff;
+    background-color: var(--primary-color);
+}
+.btn-link{
+    color: blue ;
+    cursor: pointer;
+    text-decoration: underline;
 }
