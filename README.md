@@ -29,11 +29,11 @@ Start react app
   * List of users
   * Search functionality with username
   * User can
-  __* Bookmark the post
-  __* Delete the post 
-  __* Edit the post
-  __* Comment on the post
-  __* Like the post
+  _ * Bookmark the post
+  _ * Delete the post 
+  _ * Edit the post
+  _ * Comment on the post
+  _ * Like the post
   * Authorization
   
   ## Author 
