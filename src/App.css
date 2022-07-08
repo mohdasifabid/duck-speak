@@ -127,12 +127,12 @@
   flex-grow: 1;
 }
 .sm-layout-navlist-container{
-  flex-basis: 250px;
+  flex-basis: 300px;
   height: 100vh;
   border-right: 1px solid var(--secondary-color);
 }
 .sm-layout-peoplesList-container{
-  flex-basis: 250px;
+  flex-basis: 350px;
   height: 100vh;
   border-left: 1px solid var(--secondary-color);
 }
