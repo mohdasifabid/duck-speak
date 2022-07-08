@@ -29,7 +29,7 @@ Start react app
   * List of users
   * Search functionality with username
   * User can
-  _ * Bookmark the post
+  __* Bookmark the post
   _ * Delete the post 
   _ * Edit the post
   _ * Comment on the post
