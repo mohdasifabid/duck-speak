@@ -57,7 +57,9 @@ export const Login = () => {
         </button>
         <p>
           New user?
-          <Link to="/signup">Create account</Link>
+          <a className="btn-link" onClick={() => navigate("/signup")}>
+            Create account
+          </a>
         </p>
       </div>
     </div>
