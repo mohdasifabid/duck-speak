@@ -8,7 +8,7 @@ import { deleteCall, getCall, postCall } from "./ReusableFunctions";
 export const Postcard = ({ item }) => {
   const { state, dispatch } = usePostProvider();
   const { state: authState } = useAuthProvider();
-  const [likes, setLikes] = useState(null);
+  const [likes, setLikes] = useState(0);
   const navigate = useNavigate();
 
   const getPost = async (id) => {
@@ -19,16 +19,19 @@ export const Postcard = ({ item }) => {
   const deletePostHandler = async (id) => {
     const data = await deleteCall(`/api/posts/${id}`);
     dispatch({ type: "GET_POSTS", payload: data.posts });
+    
   };
 
   const postLike = async (id) => {
     const data = await postCall(`/api/posts/like/${id}`, {});
-    setLikes(data.post.likes.likeCount);
+    const post = data.posts.find((item) => item._id = id)
+    setLikes(post.likes.likeCount)
   };
 
   const postDislike = async (id) => {
     const data = await postCall(`/api/posts/dislike/${id}`, {});
-    setLikes(data.post.likes.likeCount);
+    const post = data.posts.find((item) => item._id = id)
+    setLikes(post.likes.likeCount)
   };
 
   const postBookMark = async (id) => {
@@ -84,7 +87,7 @@ export const Postcard = ({ item }) => {
         {likes ? (
           <span>
             <i
-              className="fa-regular fa-heart"
+              className="fa-solid fa-heart"
               onClick={() =>
                 authState.isLoggedIn
                   ? postDislike(item._id)
@@ -101,7 +104,7 @@ export const Postcard = ({ item }) => {
                 authState.isLoggedIn ? postLike(item._id) : navigate("/login")
               }
             ></i>
-            {likes}
+            {""}
           </span>
         )}
 
