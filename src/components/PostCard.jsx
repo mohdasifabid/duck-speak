@@ -17,8 +17,11 @@ export const Postcard = ({ item }) => {
   };
 
   const deletePostHandler = async (id) => {
+   if( confirm("Are you sure to delete thid post?")){
     const data = await deleteCall(`/api/posts/${id}`);
     dispatch({ type: "GET_POSTS", payload: data.posts });
+    navigate("/")
+   }
     
   };
 
@@ -155,9 +158,8 @@ export const Postcard = ({ item }) => {
         <span
           onClick={() =>
             authState.isLoggedIn
-              ? deletePostHandler(item._id) &&
-                alert("Are you sure to delete thid post?")
-              : navigate("/login")
+              ? deletePostHandler(item._id) :
+               navigate("/login")
           }
         >
           <i className="fa-solid fa-trash"></i>

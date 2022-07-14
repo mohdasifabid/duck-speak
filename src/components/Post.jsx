@@ -132,10 +132,12 @@ export const Post = () => {
 
                 <span
                   onClick={async () => {
-                    let resp = await postCall(
+                  if(confirm("sure")){
+                    const resp = await postCall(
                       `/api/comments/delete/${id}/${comment._id}`
                     );
                     setComments(resp.comments);
+                  }
                   }}
                 >
                   <i className="fa-solid fa-trash"></i>
