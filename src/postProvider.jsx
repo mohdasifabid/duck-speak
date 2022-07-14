@@ -1,35 +1,36 @@
 import { createContext, useContext, useReducer } from "react";
 export const PostContext = createContext();
 export const usePostProvider = () => useContext(PostContext);
+import { GET_BOOKMARKED, GET_POST, GET_POSTS, GET_USERS, GET_USER_ID, REPLYING } from "./components/postActionTypes";
 
 const reducerFunction = (state, action) => {
   switch (action.type) {
-    case "GET_POSTS":
+    case GET_POSTS:
       return {
         ...state,
         posts: action.payload,
       };
-    case "GET_POST":
+    case GET_POST:
       return {
         ...state,
         post: action.payload,
       };
-    case "GET_USERS":
+    case GET_USERS:
       return {
         ...state,
         users: action.payload,
       };
-    case "REPLYING":
+    case REPLYING:
       return {
         ...state,
         reply: action.payload,
       };
-    case "GET_BOOKMARKED":
+    case GET_BOOKMARKED:
       return {
         ...state,
         bookmarks: action.payload,
       };
-    case "GET_USER_ID":
+    case GET_USER_ID:
       return {
         ...state,
         userID: action.payload,

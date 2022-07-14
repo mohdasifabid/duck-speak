@@ -3,6 +3,7 @@ import { useState } from "react";
 import { postCall } from "./ReusableFunctions";
 import { usePostProvider } from "../postProvider";
 import { useAuthProvider } from "../authProvider";
+import { GET_POSTS } from "./postActionTypes";
 
 export const PostMaker = () => {
   const { state: authState } = useAuthProvider();
@@ -15,7 +16,7 @@ export const PostMaker = () => {
         content: newPost,
       },
     });
-    dispatch({ type: "GET_POSTS", payload: data.posts });
+    dispatch({ type: GET_POSTS, payload: data.posts });
   };
 
   return authState.isLoggedIn ? (
