@@ -35,7 +35,7 @@ export const Login = () => {
   return (
     <div className="login">
       <div className="login-container">
-        <h2>Login to Speak</h2>
+        <h3>Login to Speak</h3>
         <input
           type="text"
           className="login-inputs"
