@@ -42,12 +42,7 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/post/:id" element={<Post />} />
         </Route>
-
-        {authState.isLoggedIn ? (
-          <Route path="/login" element={<Home />} />
-        ) : (
-          <Route path="/login" element={<Login />} />
-        )}
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   );
