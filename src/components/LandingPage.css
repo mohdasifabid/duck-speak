@@ -1,31 +1,45 @@
+.sm-lpage-background{
+    background-color: var(--primary-color);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+.sm-lpage{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-.lpage-content-container{
+.sm-lpage-content-container{
+    background-color: #fff;
     display: grid;
-    grid-template-columns: 50% 50%;
-    margin: 2rem;
-    height: 28rem;
-    border-radius: 10px;    
-    box-shadow: 1px 2px 2px 2px black;
+    grid-template-columns: 40% 60%;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--secondary-color);
+    padding-left: 1.5rem;
+    padding-top: .5rem;
 }
 .lpage-leftSide {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 28rem;
-
+    padding-right: 1rem;
+    
 }
-.lpage-heading{
+.sm-lpage-heading{
     text-decoration: none;
     cursor: pointer;
+    font-size: x-large;
+    font-weight: bold;
 }
-.lpage-leftSide div {
-    padding: 0rem 1rem;
-}
+
 .lpage-rightSide img {
-    width: 100%;
-    height: 28rem;
-    border-radius: 0 10px 10px 0;
+    width: inherit;
 }
 .small {
     margin-left: .5rem;
@@ -33,10 +47,24 @@
 .lpage-btn-container{
     margin: 0 2rem;
 }
-.lpage-btn{
+.sm-lpage-btn{
     min-width: 8rem;
     height: 2.5rem;
     border: none;
     cursor: pointer;
     background-color: var(--secondary-color);
+}
+.sm-lpage-login-link{
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}
+
+@media (max-width:520px){
+    .sm-lpage-content-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 }

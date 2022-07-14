@@ -1,49 +1,30 @@
-import axios from "axios";
+import { Layout } from "./Layout";
 import { useEffect, useState } from "react";
+import { getCall, postCall } from "./ReusableFunctions";
 import { useNavigate, useParams } from "react-router-dom";
-import { Navbar } from "./Navbar";
 
 export const Edit = () => {
   const { id } = useParams();
   const [post, setPost] = useState({});
   const navigate = useNavigate();
-  useEffect(() => {
-    const getPost = async (id) => {
-      const token = localStorage.getItem("encodedToken");
-      const response = await axios.get(`/api/posts/${id}`, {
-        headers: {
-          authorization: token,
-        },
-      });
-      if (response.status === 200) {
-        setPost(response.data.post);
-      }
-    };
-    getPost(id);
+
+  useEffect(async () => {
+    const data = await getCall(`/api/posts/${id}`);
+    setPost(data.post);
   }, []);
 
-  const postEditedPost = async (id) => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.post(
-      `/api/posts/edit/${id}`,
-      {
-        postData: post,
-      },
-      {
-        headers: {
-          authorization: token,
-        },
-      }
-    );
-    if (response.status === 201) {
-      navigate("/home");
-    }
+  const updatedPostHandler = async (id) => {
+    const data = await postCall(`/api/posts/edit/${id}`, {
+      postData: post,
+    });
+    navigate("/");
   };
+
   return (
-    <div>
-      <Navbar />
-      <div className="edit-box">
+    <Layout>
+      <div className="avatar-textarea-container">
         <textarea
+          id="createPostHere"
           value={post.content}
           className="textarea"
           placeholder="Whats happening?"
@@ -51,15 +32,12 @@ export const Edit = () => {
             setPost({ ...post, content: e.target.value });
           }}
         ></textarea>
-        <div className="reply-btn-container ">
-          <button
-            className="duck-primary-btn-s duck-primary-btn"
-            onClick={() => postEditedPost(id)}
-          >
-            update
-          </button>
-        </div>
       </div>
-    </div>
+      <div className="sm-postmaker-and-postcard-bottom-container">
+        <button className="speak-btn" onClick={() => updatedPostHandler(id)}>
+          update
+        </button>
+      </div>
+    </Layout>
   );
 };

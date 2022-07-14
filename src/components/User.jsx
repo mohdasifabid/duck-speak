@@ -1,101 +1,69 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Navbar } from "./Navbar";
-import { Postcard } from "./PostCard";
-import { usePostProvider } from "../postProvider";
 import "./User.css";
-import { NavList } from "./NavList";
-import { PeoplesList } from "./PeopleList";
+import { Layout } from "./Layout";
+import { usePostProvider } from "../postProvider";
+import { useParams } from "react-router-dom";
+import { postCall } from "./ReusableFunctions";
+import { useState } from "react";
+
 export const User = () => {
-  const { state } = usePostProvider();
   const { username } = useParams();
-  const [user, setUser] = useState({});
-  console.log(user);
-  useEffect(() => {
-    try {
-      const findUser = async (username) => {
-        let clickedUser = await state.users.find(
-          (user) => user.username === username
-        );
+  const { state, dispatch } = usePostProvider();
+  const foundUser = state.users.find((user) => user.username === username);
+  const [selectedUser, setSelectedUser] = useState(foundUser);
+  const [followed, setFollowed] = useState(false);
 
-        setUser(clickedUser);
-      };
-      findUser(username);
-    } catch (error) {}
-  }, []);
-
-  const follow = async (userId) => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.post(
-      `/api/users/follow/${userId}`,
-      {},
-      {
-        headers: {
-          authorization: token,
-        },
-      }
-    );
-    if (response.status === 200) {
-      const getUser = async () => {
-        const response = await axios.get(`/api/users/`, {
-          headers: {
-            authorization: token,
-          },
-        });
-        if (response.status === 200) {
-          dispatch({ type: "GET_USERS", payload: response.data.users });
-        }
-      };
-      getUser();
-    }
+  const followHandler = async (userId) => {
+    const data = await postCall(`/api/users/follow/${userId}`, {});
+    setSelectedUser(data.followUser);
+    setFollowed(true);
   };
-
+  const unfollowHandler = async (userId) => {
+    const data = await postCall(`/api/users/unfollow/${userId}`, {});
+    setSelectedUser(data.followUser);
+    setFollowed(false);
+  };
   return (
-    <div className="common-container">
-      <NavList />
-      <div>
-        <Navbar style={{ position: "fixed" }} />
-        <div>
-          <div className="img-container">
-            <img
-              className="cover-img"
-              src="https://picsum.photos/536/354"
-              alt=""
-            />
-            <img
-              className="profile-img"
-              src="https://picsum.photos/id/1062/367/267"
-              alt=""
-            />
-          </div>
-          <div className="btn-container">
-            <button
-              className="follow-btn duck-primary-btn-s duck-primary-btn"
-              onClick={() => follow(user._id)}
-            >
-              Follow
-            </button>
-          </div>
-          <div className="userInfo-container">
-            <p className="name-and-userId">
-              <strong>{`${user.firstName} ${user.lastName}`}</strong>
-              <small>{`@${user.username}`}</small>
-            </p>
-            <p>Joined May 2022</p>
-            <p>
-              <span>
-                <strong>{user.following}</strong>Following
-              </span>
-              <span>
-                <strong>{user.followers}</strong>Followes
-              </span>
-            </p>
-          </div>
-        </div>
-        {/* <Postcard /> */}
+    <Layout>
+      <div className="img-container">
+        <img className="cover-img" src="https://picsum.photos/536/354" alt="" />
+        <img
+          className="profile-img"
+          src="https://picsum.photos/id/1062/367/267"
+          alt=""
+        />
       </div>
-      <PeoplesList />
-    </div>
+      <div className="btn-container">
+        {followed ? (
+          <button
+            className="follow-btn duck-primary-btn-s duck-primary-btn"
+            onClick={() => unfollowHandler(selectedUser._id)}
+          >
+            Unfollow
+          </button>
+        ) : (
+          <button
+            className="follow-btn duck-primary-btn-s duck-primary-btn"
+            onClick={() => followHandler(selectedUser._id)}
+          >
+            Follow
+          </button>
+        )}
+      </div>
+      <div className="userInfo-container">
+        <p className="name-and-userId">
+          <strong>{`${selectedUser.firstName} ${selectedUser.lastName}`}</strong>
+          <small>{`@${selectedUser.username}`}</small>
+        </p>
+        <p>Joined May 2022</p>
+        <p>
+          <span>
+            <strong>{selectedUser.following.length}</strong>Following
+          </span>
+          <span>
+            <strong>{selectedUser.followers.length}</strong>Followers
+          </span>
+        </p>
+      </div>
+    </Layout>
   );
 };

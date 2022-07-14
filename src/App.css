@@ -1,6 +1,13 @@
 .duck-navbar-container{
-  max-height: 3.5rem;
-  border: 2px solid var(--secondary-color);
+  border-bottom: 2px solid var(--secondary-color);
+  background-color: white;
+  padding: 0;
+  height: inherit;
+}
+.duck-navbar-item{ 
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .duck-navbar-home {
   margin-right: 4rem;
@@ -26,5 +33,128 @@
 
 .common-container{
   display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.main-container{
+  /* width: 100vw; */
+  display: flex;
+  flex-grow: 1;
 }
 
+
+
+@media (max-width: 520px){
+  .navlist{
+    display: none;
+  }
+  .sm-layout-navlist-container{
+    display: none;
+  }
+  .sm-layout-peoplesList-container{
+    display: none;
+  }
+  .common-container{
+    height: 100vh;
+  }
+}
+.edit-page{
+  margin: 1rem 3rem;
+}
+.edit-page div textarea {
+  padding: 0;
+}
+
+.comment-card{
+  padding: .5rem;
+  border: 1px solid var(--secondary-color);
+  border-top: none;
+}
+.comment-card img{
+  width: 2rem ;
+  height: 2rem ;
+}
+.comment-card-username{
+  margin-top: -2rem;
+  margin-bottom: 0;
+  padding-left: 2.5rem;
+  font-size: small;
+  font-weight: bold;
+}
+.comment-card-comment{
+  margin-top: 0rem;
+  margin-bottom: 0;
+  padding-left: 2.5rem;
+  font-size: small;
+}
+.comment-card-bottom{
+ display: flex;
+ justify-content: space-between;
+ padding: .25rem 2rem 0 3rem;
+ margin-top: 1rem;
+ font-size: small;
+ border-top: 1px solid var(--secondary-color);
+}
+.comment-card-bottom span {
+  cursor: pointer;
+  margin-top: -.1rem;
+  margin-bottom: -.3rem;
+}
+.post-container{
+  position: relative;
+}
+.edit{
+  width: 50vw;
+  position: absolute;
+  top: 40vh;
+  left: 25vw;  
+}
+
+/*  */
+.sm-layout{
+  display: flex;
+  flex-direction: column;
+  /* height: 100vh; */
+  flex-grow: 1;
+}
+.sm-layout-navbar-container{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 50px;
+}
+.sm-layout-childs-container{
+  flex-grow: 1;
+}
+.sm-layout-navlist-container{
+  flex-basis: 300px;
+  height: 100vh;
+  border-right: 1px solid var(--secondary-color);
+}
+.sm-layout-peoplesList-container{
+  flex-basis: 350px;
+  height: 100vh;
+  border-left: 1px solid var(--secondary-color);
+}
+.sm-layout-main-container{
+  flex-grow: 1;
+  display: flex;
+}
+.sm-layout-mobile-navigation{
+  position: sticky;
+  display: flex;
+  flex-basis: 30px;
+  bottom: 0;
+  justify-content: space-around;
+  align-items: center;
+  padding: .5rem 0;
+  background-color: var(--secondary-color);
+}
+.sm-layout-mobile-navigation a{
+  cursor: pointer;
+}
+@media(min-width: 520px){
+    .sm-layout-mobile-navigation{
+      display: none;
+    }
+}

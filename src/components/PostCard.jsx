@@ -1,133 +1,45 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { usePostProvider } from "../postProvider";
 import "./PostCard.css";
+import { useState } from "react";
+import { usePostProvider } from "../postProvider";
+import { useAuthProvider } from "../authProvider";
+import { Link, useNavigate } from "react-router-dom";
+import { deleteCall, getCall, postCall } from "./ReusableFunctions";
 
 export const Postcard = ({ item }) => {
   const { state, dispatch } = usePostProvider();
+  const { state: authState } = useAuthProvider();
   const [likes, setLikes] = useState(null);
+  const navigate = useNavigate();
 
   const getPost = async (id) => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.get(`/api/posts/${id}`, {
-      headers: {
-        authorization: token,
-      },
-    });
-    if (response.status === 200) {
-      dispatch({ type: "GET_POST", payload: response.data.post });
-    }
+    const data = await getCall(`/api/posts/${id}`);
+    dispatch({ type: "GET_POST", payload: data.post });
   };
+
   const deletePostHandler = async (id) => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.delete(`/api/posts/${id}`, {
-      headers: {
-        authorization: token,
-      },
-    });
-    if (response.status === 201) {
-      const token = localStorage.getItem("encodedToken");
-      const getPosts = async () => {
-        const response = await axios.get("/api/posts", {
-          headers: {
-            authorization: token,
-          },
-        });
-        if (response.status === 200) {
-          dispatch({ type: "GET_POSTS", payload: response.data.posts });
-        }
-      };
-      getPosts();
-    }
+    const data = await deleteCall(`/api/posts/${id}`);
+    dispatch({ type: "GET_POSTS", payload: data.posts });
   };
+
   const postLike = async (id) => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.post(
-      `/api/posts/like/${id}`,
-      {},
-      {
-        headers: {
-          authorization: token,
-        },
-      }
-    );
-    if (response.status === 201) {
-      const getPost = async (id) => {
-        const response = await axios.get(`/api/posts/${id}`, {
-          headers: {
-            authorization: token,
-          },
-        });
-        if (response.status === 200) {
-          setLikes(response.data.post.likes.likeCount);
-        }
-      };
-      getPost(id);
-    }
+    const data = await postCall(`/api/posts/like/${id}`, {});
+    setLikes(data.post.likes.likeCount);
   };
 
   const postDislike = async (id) => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.post(
-      `/api/posts/dislike/${id}`,
-      {},
-      {
-        headers: {
-          authorization: token,
-        },
-      }
-    );
-    if (response.status === 201) {
-      const getPost = async (id) => {
-        const response = await axios.get(`/api/posts/${id}`, {
-          headers: {
-            authorization: token,
-          },
-        });
-        if (response.status === 200) {
-          setLikes(response.data.post.likes.likeCount);
-        }
-      };
-      getPost(id);
-    }
+    const data = await postCall(`/api/posts/dislike/${id}`, {});
+    setLikes(data.post.likes.likeCount);
   };
 
   const postBookMark = async (id) => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.post(
-      `/api/users/bookmark/${id}`,
-      {},
-      {
-        headers: {
-          authorization: token,
-        },
-      }
-    );
-    if (response.status === 200) {
-      dispatch({ type: "GET_BOOKMARKED", payload: response.data.bookmarks });
-    }
+    const data = await postCall(`/api/users/bookmark/${id}`, {});
+    dispatch({ type: "GET_BOOKMARKED", payload: data.bookmarks });
   };
 
   const deleteBookMark = async (id) => {
-    const token = localStorage.getItem("encodedToken");
-    const response = await axios.post(
-      `/api/users/remove-bookmark/${id}`,
-      {},
-      {
-        headers: {
-          authorization: token,
-        },
-      }
-    );
-    if (response.status === 200) {
-      dispatch({
-        type: "GET_BOOKMARKED",
-        payload: response.data.bookmarks,
-      });
-    }
+    const data = await postCall(`/api/users/remove-bookmark/${id}`, {});
+    dispatch({ type: "GET_BOOKMARKED", payload: data.bookmarks });
   };
-
   const findUserId = (username) => {
     let clickedUser = state.users.find((user) => user.username === username);
     dispatch({ type: "GET_USER_ID", payload: clickedUser._id });
@@ -137,50 +49,90 @@ export const Postcard = ({ item }) => {
   return (
     <div className="postcard-container">
       <div className="avatar-content-container">
-        <Link
-          to={`/user/${item.username}`}
-          onClick={() => findUserId(item.username)}
+        <a
+          className="sm-postcard-avatar-container"
+          onClick={() => {
+            findUserId(item.username);
+            navigate(`/user/${item.username}`);
+          }}
         >
-          <div className="duck-avatar-badge duck-avatar-badge-m">
-            <img
-              src="https://picsum.photos/id/1062/367/267"
-              alt=""
-              className="duck-avatar-badge-img"
-            />
-          </div>
-        </Link>
-
-        <div className="post-content">
-          <p>
+          <img
+            src="https://picsum.photos/id/1062/367/267"
+            alt=""
+            className="sm-postcard-avatar"
+          />
+        </a>
+        <div className="sm-post-content">
+          <span>
             <strong>{`${item.username}${" "}`}</strong>
             {new Date(item.createdAt).getHours()} hours ago
-          </p>
-          <Link
-            to={`/post/${item._id}`}
-            style={{
-              cursor: "pointer",
-              textDecoration: "none",
-              color: "black",
+          </span>
+
+          <a
+            onClick={() => {
+              getPost(item._id);
+              dispatch({ type: "REPLYING", payload: false });
+              navigate(`/post/${item._id}`);
             }}
+            className="textContent-container"
           >
-            <p
-              onClick={() => {
-                getPost(item._id);
-                dispatch({ type: "REPLYING", payload: false });
-              }}
-            >
-              {item.content}
-            </p>
-          </Link>
+            {item.content}
+          </a>
         </div>
       </div>
       <div className="user-action-icons-container">
+        {likes ? (
+          <span>
+            <i
+              className="fa-regular fa-heart"
+              onClick={() =>
+                authState.isLoggedIn
+                  ? postDislike(item._id)
+                  : navigate("/login")
+              }
+            ></i>
+            {likes}
+          </span>
+        ) : (
+          <span>
+            <i
+              className="fa-regular fa-heart"
+              onClick={() =>
+                authState.isLoggedIn ? postLike(item._id) : navigate("/login")
+              }
+            ></i>
+            {likes}
+          </span>
+        )}
+
+        <span>
+          <i
+            className="fa-regular fa-comment reply-icon"
+            onClick={() => {
+              dispatch({ type: "REPLYING", payload: true });
+              navigate(`/post/${item._id}`);
+            }}
+          ></i>
+          {item.comments && item.comments.length}
+        </span>
+        <span
+          onClick={() =>
+            authState.isLoggedIn
+              ? navigate(`/edit/${item._id}`)
+              : navigate("/login")
+          }
+        >
+          <i className="fa-solid fa-pen-to-square"></i>
+        </span>
+
         {isMarked !== -1 ? (
           <span>
             <i
               className="fa-solid fa-bookmark"
               onClick={() => {
-                deleteBookMark(item._id);
+                authState.isLoggedIn
+                  ? deleteBookMark(item._id)
+                  : navigate("/login");
               }}
             ></i>
           </span>
@@ -189,49 +141,25 @@ export const Postcard = ({ item }) => {
             <i
               className="fa-regular fa-bookmark"
               onClick={() => {
-                postBookMark(item._id);
+                authState.isLoggedIn
+                  ? postBookMark(item._id)
+                  : navigate("/login");
               }}
             ></i>
           </span>
         )}
 
-        <Link to={`/post/${item._id}`}>
-          <span>
-            <i
-              className="fa-regular fa-comment"
-              onClick={() => {
-                dispatch({ type: "REPLYING", payload: true });
-              }}
-            ></i>
-          </span>
-        </Link>
-        {likes ? (
-          <span>
-            <i
-              className="fa-regular fa-heart"
-              onClick={() => postDislike(item._id)}
-            ></i>
-            {likes}
-          </span>
-        ) : (
-          <span>
-            <i
-              className="fa-regular fa-heart"
-              onClick={() => postLike(item._id)}
-            ></i>
-            {likes}
-          </span>
-        )}
-        <span>
-          <i
-            className="fa-solid fa-trash"
-            onClick={() => deletePostHandler(item._id)}
-          ></i>
+        <span
+          onClick={() =>
+            authState.isLoggedIn
+              ? deletePostHandler(item._id) &&
+                alert("Are you sure to delete thid post?")
+              : navigate("/login")
+          }
+        >
+          <i className="fa-solid fa-trash"></i>
         </span>
       </div>
-      <Link to={`/edit/${item._id}`}>
-        <span className="edit-options">Edit</span>
-      </Link>
     </div>
   );
 };

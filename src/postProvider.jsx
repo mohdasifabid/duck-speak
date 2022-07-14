@@ -29,11 +29,6 @@ const reducerFunction = (state, action) => {
         ...state,
         bookmarks: action.payload,
       };
-    case "GET_USERS":
-      return {
-        ...state,
-        users: action.payload,
-      };
     case "GET_USER_ID":
       return {
         ...state,
@@ -49,7 +44,6 @@ const initialState = {
   users: [],
   reply: false,
   bookmarks: [],
-  users: [],
   userID: "",
 };
 export const PostProvider = ({ children }) => {

@@ -1,28 +1,51 @@
 .postcard-container{
     border: 1px solid var(--secondary-color);
-    padding: 1rem;
-    position: relative;
-
+    padding: 1rem 1rem 0 1rem;
 }
 .avatar-content-container{
     display: flex;
-    padding: 1rem;
+    padding: .25rem;
 }
-.post-content{
-    padding-left: 1rem;
+.sm-post-content{
+    padding: 0 0 0 1rem ;
+    font-size: small;
+    display: flex;
+    flex-direction: column;
+}
+.sm-post-content a {
+    margin-bottom: 1rem;
+    margin-top: .5rem;
+    font-size: small;
 }
 .user-action-icons-container{
-    padding: 1rem;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    font-size: small;
+    border-top: 1px solid var(--secondary-color);
+    padding: .25rem 0;
 }
 .user-action-icons-container i{
     cursor: pointer;
+
 }
-.edit-options{
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
+.comment-count-container{
+   text-decoration: none; 
+   color: var(--primary-color);
+}
+.reply-icon {
+   color: var(--primary-color);
+}
+.comment-count{
+    color:var(--primary-color);
+}
+.textContent-container{
+    word-break: break-all;
+}
+
+.sm-postcard-avatar{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
     cursor: pointer;
 }

@@ -1,0 +1,36 @@
+.signup-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+.signup-box{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   gap: .5rem;
+   border: 3px solid var(--secondary-color);
+   width: 16rem;
+   height: 20rem;
+   padding: 2rem;
+}
+
+.signup-inputs{
+    padding: .5rem 3rem .5rem 1rem;
+}
+
+.signup-btn{
+    padding: .75rem 5.76rem;
+    margin-top: .5rem;
+    cursor: pointer;
+    border: none
+}
+.signup-btn:hover{
+    color: #fff;
+    background-color: var(--primary-color);
+}
+.btn-link{
+    color: blue ;
+    cursor: pointer;
+    text-decoration: underline;
+}

@@ -9,16 +9,66 @@ import { formatDate } from "../utils/authUtils";
 export const posts = [
   {
     _id: uuid(),
-    content:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident. ",
+    content: "Hello World!",
     likes: {
       likeCount: 0,
       likedBy: [],
       dislikedBy: [],
     },
-    username: "adarshbalika",
+    username: "duckspeak",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    comments: [
+      {
+        _id: uuid(),
+        username: "dragonfruit",
+        text: "Good",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+      {
+        _id: uuid(),
+        username: "orange",
+        text: "Amazing bro!",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+    ],
   },
-
+  {
+    _id: uuid(),
+    content: "Have a good day!",
+    likes: {
+      likeCount: 0,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    username: "guestuser",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+    comments: [
+      {
+        _id: uuid(),
+        username: "duckspeak",
+        text: "You too",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+      {
+        _id: uuid(),
+        username: "orange",
+        text: "Thanks",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+    ],
+  },
 ];

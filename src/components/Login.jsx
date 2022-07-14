@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthProvider } from "../authProvider";
 import "./Login.css";
 export const Login = () => {
-  const { state: authState } = useAuthProvider();
+  const { state: authState, dispatch: authDispatch } = useAuthProvider();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -15,24 +15,36 @@ export const Login = () => {
       password: password,
     });
     if (response.status === 200) {
+      authDispatch({ type: "LOGIN_STATUS", payload: true });
       localStorage.setItem("encodedToken", response.data.encodedToken);
-      navigate("/home");
+      navigate("/");
     }
   };
-
+  const guestLoginHandler = async () => {
+    const response = await axios.post("/api/auth/login", {
+      username: "guestuser",
+      password: "guestUser123",
+    });
+    console.log(response);
+    if (response.status === 200) {
+      authDispatch({ type: "LOGIN_STATUS", payload: true });
+      localStorage.setItem("encodedToken", response.data.encodedToken);
+      navigate("/");
+    }
+  };
   return (
     <div className="login">
       <div className="login-container">
         <h2>Login to Speak</h2>
         <input
           type="text"
-          className="login-email"
+          className="login-inputs"
           placeholder="username"
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
           type="password"
-          className="login-password"
+          className="login-inputs"
           placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -40,10 +52,14 @@ export const Login = () => {
         <button className="login-btn" onClick={loginHandler}>
           Login
         </button>
-
+        <button className="login-btn" onClick={guestLoginHandler}>
+          Login as guest
+        </button>
         <p>
           New user?
-          <Link to="/signup">Create account</Link>
+          <a className="btn-link" onClick={() => navigate("/signup")}>
+            Create account
+          </a>
         </p>
       </div>
     </div>
