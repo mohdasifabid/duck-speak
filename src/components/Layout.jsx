@@ -3,7 +3,7 @@ import { NavList } from "./NavList";
 import { PeoplesList } from "./PeopleList";
 import { useNavigate } from "react-router-dom";
 
-export const Layout = ({ children }) => {
+export const Layout = ({ children}) => {
   const navigate = useNavigate();
   return (
     <div className="sm-layout">

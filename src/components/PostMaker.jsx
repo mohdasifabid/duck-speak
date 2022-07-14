@@ -1,22 +1,28 @@
 import "./PostMaker.css";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { postCall } from "./ReusableFunctions";
 import { usePostProvider } from "../postProvider";
 import { useAuthProvider } from "../authProvider";
+import { GET_POSTS, GET_REF } from "./postActionTypes";
 
 export const PostMaker = () => {
   const { state: authState } = useAuthProvider();
   const { dispatch } = usePostProvider();
   const [newPost, setNewPost] = useState("");
-
+  const postMakerRef = useRef()
+  
   const publishPostHandler = async () => {
     const data = await postCall("/api/posts", {
       postData: {
         content: newPost,
       },
     });
-    dispatch({ type: "GET_POSTS", payload: data.posts });
+    dispatch({ type: GET_POSTS, payload: data.posts });
   };
+
+  useEffect(()=>{
+   dispatch({type: GET_REF, payload: postMakerRef})
+  },[])
 
   return authState.isLoggedIn ? (
     <div>
@@ -28,7 +34,8 @@ export const PostMaker = () => {
             className="sm-postmaker-avatar"
           />
         </a>
-        <textarea
+        <textarea 
+          ref={postMakerRef}
           id="createPostHere"
           style={newPost.length > 150 ? { color: "red" } : {}}
           value={newPost}

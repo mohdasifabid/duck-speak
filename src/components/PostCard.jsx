@@ -4,45 +4,52 @@ import { usePostProvider } from "../postProvider";
 import { useAuthProvider } from "../authProvider";
 import { Link, useNavigate } from "react-router-dom";
 import { deleteCall, getCall, postCall } from "./ReusableFunctions";
+import { GET_BOOKMARKED, GET_POST, GET_POSTS, GET_USER_ID, REPLYING } from "./postActionTypes";
 
 export const Postcard = ({ item }) => {
   const { state, dispatch } = usePostProvider();
   const { state: authState } = useAuthProvider();
-  const [likes, setLikes] = useState(null);
+  const [likes, setLikes] = useState(0);
   const navigate = useNavigate();
 
   const getPost = async (id) => {
     const data = await getCall(`/api/posts/${id}`);
-    dispatch({ type: "GET_POST", payload: data.post });
+    dispatch({ type: GET_POST, payload: data.post });
   };
 
   const deletePostHandler = async (id) => {
+   if( confirm("Are you sure to delete thid post?")){
     const data = await deleteCall(`/api/posts/${id}`);
-    dispatch({ type: "GET_POSTS", payload: data.posts });
+    dispatch({ type: GET_POSTS, payload: data.posts });
+    navigate("/")
+   }
+    
   };
 
   const postLike = async (id) => {
     const data = await postCall(`/api/posts/like/${id}`, {});
-    setLikes(data.post.likes.likeCount);
+    const post = data.posts.find((item) => item._id === id)
+    setLikes(post.likes.likeCount)
   };
 
   const postDislike = async (id) => {
     const data = await postCall(`/api/posts/dislike/${id}`, {});
-    setLikes(data.post.likes.likeCount);
+    const post = data.posts.find((item) => item._id === id)
+    setLikes(post.likes.likeCount)
   };
 
   const postBookMark = async (id) => {
     const data = await postCall(`/api/users/bookmark/${id}`, {});
-    dispatch({ type: "GET_BOOKMARKED", payload: data.bookmarks });
+    dispatch({ type: GET_BOOKMARKED, payload: data.bookmarks });
   };
 
   const deleteBookMark = async (id) => {
     const data = await postCall(`/api/users/remove-bookmark/${id}`, {});
-    dispatch({ type: "GET_BOOKMARKED", payload: data.bookmarks });
+    dispatch({ type: GET_BOOKMARKED, payload: data.bookmarks });
   };
   const findUserId = (username) => {
     let clickedUser = state.users.find((user) => user.username === username);
-    dispatch({ type: "GET_USER_ID", payload: clickedUser._id });
+    dispatch({ type: GET_USER_ID, payload: clickedUser._id });
   };
   const isMarked = state.bookmarks.findIndex((post) => post._id === item._id);
 
@@ -71,7 +78,7 @@ export const Postcard = ({ item }) => {
           <a
             onClick={() => {
               getPost(item._id);
-              dispatch({ type: "REPLYING", payload: false });
+              dispatch({ type: REPLYING, payload: false });
               navigate(`/post/${item._id}`);
             }}
             className="textContent-container"
@@ -84,7 +91,7 @@ export const Postcard = ({ item }) => {
         {likes ? (
           <span>
             <i
-              className="fa-regular fa-heart"
+              className="fa-solid fa-heart"
               onClick={() =>
                 authState.isLoggedIn
                   ? postDislike(item._id)
@@ -101,7 +108,7 @@ export const Postcard = ({ item }) => {
                 authState.isLoggedIn ? postLike(item._id) : navigate("/login")
               }
             ></i>
-            {likes}
+            {""}
           </span>
         )}
 
@@ -109,7 +116,7 @@ export const Postcard = ({ item }) => {
           <i
             className="fa-regular fa-comment reply-icon"
             onClick={() => {
-              dispatch({ type: "REPLYING", payload: true });
+              dispatch({ type: REPLYING, payload: true });
               navigate(`/post/${item._id}`);
             }}
           ></i>
@@ -152,9 +159,8 @@ export const Postcard = ({ item }) => {
         <span
           onClick={() =>
             authState.isLoggedIn
-              ? deletePostHandler(item._id) &&
-                alert("Are you sure to delete thid post?")
-              : navigate("/login")
+              ? deletePostHandler(item._id) :
+               navigate("/login")
           }
         >
           <i className="fa-solid fa-trash"></i>
