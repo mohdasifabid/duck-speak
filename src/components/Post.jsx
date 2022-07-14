@@ -10,11 +10,13 @@ export const Post = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [upVote, setUpVote] = useState([]);
+
   useEffect(async () => {
     let data = await getCall(`/api/posts/${id}`);
     setPost(data.post);
     setComments(data.post.comments);
   }, []);
+  
   return (
     <Layout>
       <Postcard item={post} key={post._id} post={post} />
@@ -27,10 +29,9 @@ export const Post = () => {
           ></textarea>
         </div>
         <div className="sm-postmaker-and-postcard-bottom-container">
-          {newComment === "" ? (
             <button
-              disabled
-              style={{ backgroundColor: "gray" }}
+              disabled={newComment.length===0}
+              style={newComment.length===0 ? {backgroundColor: "gray"} : {}}
               className="speak-btn"
               onClick={async () => {
                 let commentData = await postCall(`/api/comments/add/${id}`, {
@@ -38,24 +39,11 @@ export const Post = () => {
                 });
                 setComments(commentData.comments);
                 setNewComment("");
+                console.log("not disabled")
               }}
             >
               reply
             </button>
-          ) : (
-            <button
-              className="speak-btn"
-              onClick={async () => {
-                let commentData = await postCall(`/api/comments/add/${id}`, {
-                  commentData: { text: newComment },
-                });
-                setComments(commentData.comments);
-                setNewComment("");
-              }}
-            >
-              reply
-            </button>
-          )}
         </div>
       </div>
       {comments &&
