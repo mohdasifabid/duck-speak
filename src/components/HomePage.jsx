@@ -15,8 +15,8 @@ export const Home = () => {
   }, []);
 
   return (
-    <Layout>
-      <PostMaker />
+    <Layout >
+      <PostMaker/>
       {state.posts.map((post) => {
         return <Postcard item={post} key={post._id} />;
       })}

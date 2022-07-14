@@ -1,7 +1,7 @@
 import { createContext, useContext, useReducer } from "react";
 export const PostContext = createContext();
 export const usePostProvider = () => useContext(PostContext);
-import { GET_BOOKMARKED, GET_POST, GET_POSTS, GET_USERS, GET_USER_ID, REPLYING } from "./components/postActionTypes";
+import { GET_BOOKMARKED, GET_POST, GET_POSTS, GET_USERS, GET_USER_ID, GET_REF, REPLYING } from "./components/postActionTypes";
 
 const reducerFunction = (state, action) => {
   switch (action.type) {
@@ -35,6 +35,11 @@ const reducerFunction = (state, action) => {
         ...state,
         userID: action.payload,
       };
+    case GET_REF: 
+    return {
+      ...state,
+      postMakerRef: action.payload
+    }
     default:
       return state;
   }
@@ -46,6 +51,7 @@ const initialState = {
   reply: false,
   bookmarks: [],
   userID: "",
+  postMakerRef: {}
 };
 export const PostProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducerFunction, initialState);

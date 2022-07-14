@@ -10,6 +10,7 @@
     border: none;
     outline: none;
 }
+
 .sm-postmaker-and-postcard-bottom-container{
     display: flex;
     justify-content: flex-end;
