@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuthProvider } from "../authProvider";
 import "./Login.css";
 export const Login = () => {
@@ -25,10 +25,10 @@ export const Login = () => {
       username: "guestuser",
       password: "guestUser123",
     });
-    console.log(response);
     if (response.status === 200) {
       authDispatch({ type: "LOGIN_STATUS", payload: true });
       localStorage.setItem("encodedToken", response.data.encodedToken);
+      localStorage.setItem("currentUser", JSON.stringify(response.data.foundUser));
       navigate("/");
     }
   };

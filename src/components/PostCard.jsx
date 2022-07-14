@@ -24,13 +24,13 @@ export const Postcard = ({ item }) => {
 
   const postLike = async (id) => {
     const data = await postCall(`/api/posts/like/${id}`, {});
-    const post = data.posts.find((item) => item._id = id)
+    const post = data.posts.find((item) => item._id === id)
     setLikes(post.likes.likeCount)
   };
 
   const postDislike = async (id) => {
     const data = await postCall(`/api/posts/dislike/${id}`, {});
-    const post = data.posts.find((item) => item._id = id)
+    const post = data.posts.find((item) => item._id === id)
     setLikes(post.likes.likeCount)
   };
 
