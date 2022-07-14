@@ -1,7 +1,8 @@
 import axios from "axios";
-const token = localStorage.getItem("encodedToken");
 
 async function getCall(endPoint) {
+const token = localStorage.getItem("encodedToken");
+
   try {
     const response = await axios.get(endPoint, {
       headers: {
@@ -17,6 +18,8 @@ async function getCall(endPoint) {
 }
 
 const postCall = async (endPoint, rqstBody) => {
+const token = localStorage.getItem("encodedToken");
+
   const response = await axios.post(endPoint, rqstBody, {
     headers: {
       authorization: token,
@@ -28,6 +31,8 @@ const postCall = async (endPoint, rqstBody) => {
 };
 
 const deleteCall = async (endPoint) => {
+const token = localStorage.getItem("encodedToken");
+
   const response = await axios.delete(endPoint, {
     headers: {
       authorization: token,

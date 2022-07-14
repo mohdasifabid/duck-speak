@@ -3,12 +3,13 @@ import { Layout } from "./Layout";
 import { Postcard } from "./PostCard";
 import { getCall } from "./ReusableFunctions";
 import { usePostProvider } from "../postProvider";
+import { GET_BOOKMARKED } from "./postActionTypes";
 
 export const BookMarked = () => {
   const { state, dispatch } = usePostProvider();
   useEffect(async () => {
     const data = await getCall(`/api/users/bookmark`);
-    dispatch({ type: "GET_BOOKMARKED", payload: data.bookmarks });
+    dispatch({ type: GET_BOOKMARKED, payload: data.bookmarks });
   }, []);
 
   return (

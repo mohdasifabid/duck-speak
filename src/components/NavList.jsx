@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { useAuthProvider } from "../authProvider";
+import { usePostProvider } from "../postProvider";
 import "./NavList.css";
 export const NavList = () => {
   const navigate = useNavigate();
   const { state: authState } = useAuthProvider();
+  const {state} = usePostProvider()
   return (
     <div className="navlist">
       <div className="navlist-content-container">
@@ -30,8 +32,13 @@ export const NavList = () => {
         <button
           className="navlist-btn"
           href="#createPostHere"
-          onClick={() =>
-            authState.isLoggedIn ? navigate("/login") : navigate("/login")
+          onClick={() =>{
+            if(authState.isLoggedIn){
+              state.postMakerRef.current.focus()
+            }else{
+              navigate("/login")
+            }
+          }
           }
         >
           Create New Post

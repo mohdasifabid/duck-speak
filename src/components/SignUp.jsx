@@ -1,7 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import { Navbar } from "./Navbar";
 import { useAuthProvider } from "../authProvider";
 import "./SignUp.css";
 
@@ -16,7 +15,8 @@ export const Signup = () => {
 
   const signupHandler = async () => {
     const response = await axios.post("/api/auth/signup", {
-      name: name,
+      firstName: name,
+      lastName: "",
       email: email,
       username: username,
       password: password,
@@ -30,7 +30,7 @@ export const Signup = () => {
   return (
     <div className="signup-container">
       <div className="signup-box">
-        <h2>Create a new account</h2>
+        <h3>Create new account</h3>
         <input
           type="text"
           className="signup-inputs"

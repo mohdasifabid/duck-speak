@@ -11,9 +11,9 @@ import { useAuthProvider } from "./authProvider";
 import { Routes, Route } from "react-router-dom";
 import { PostMaker } from "./components/PostMaker";
 import { BookMarked } from "./components/BookMarked";
-import { LandingPage } from "./components/LandingPage";
 import { getCall } from "./components/ReusableFunctions";
 import { PrivateRoute } from "./components/PrivateRoute";
+import { GET_USERS } from "./components/postActionTypes";
 
 function App() {
   const { state: authState, dispatch: authDispatch } = useAuthProvider();
@@ -27,7 +27,7 @@ function App() {
       authDispatch({ type: "LOGIN_STATUS", payload: false });
     }
     let data = await getCall("/api/users/");
-    dispatch({ type: "GET_USERS", payload: data.users });
+    dispatch({ type: GET_USERS, payload: data.users });
   }, []);
 
   return (
@@ -42,12 +42,7 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/post/:id" element={<Post />} />
         </Route>
-
-        {authState.isLoggedIn ? (
-          <Route path="/login" element={<Home />} />
-        ) : (
-          <Route path="/login" element={<Login />} />
-        )}
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   );
